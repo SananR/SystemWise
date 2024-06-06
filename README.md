@@ -1,38 +1,44 @@
-Project title and team name
-Team members with @mail.utoronto.ca emails
-Brief description of the web application
-Bullet points outlining how to fulfil "Required Elements"
-Bullet points outlining how to fulfil "Additional Requirements"
-Your alpha version, beta version, and final version milestones
+# SystemWise
 
+## Team Name
 
-# Codeify
-
-## Team Name: algoats
+### algoats
 
 ## Team members
-Hammad Iqbal - hammad.iqbal@mail.utoronto.ca
-Yu Yang (Kenny) Chen - kennyyuyang.chen@mail.utoronto.ca
 
+Hammad Iqbal - hammad.iqbal@mail.utoronto.ca <br/>
+Yu Yang (Kenny) Chen - kennyyuyang.chen@mail.utoronto.ca <br/>
+Sanan Rao - sanan.rao@mail.utoronto.ca
 
 ## Brief description of the web application
 
-Codeify is a specialized web application designed to help aspiring and experienced infrastructure engineers alike sharpen their skills. Similar to LeetCode, Codeify offers a vast collection of problems focused on real-world infrastructure and systems challenges, including but not limited to popular systems such as TinyURL, and Spotify. Users can practice solving these problems, (compete with peers?), and track their progress over time. With detailed solutions and explanations, as well as instantaneous feedback powered by AI, Codeify aims to bridge the gap between theoretical knowledge and practical expertise in the infrastructure domain.
+SystemWise is a specialized web application designed to help aspiring and experienced infrastructure engineers and architects sharpen their skills. Similar to LeetCode, SystemWise offers a vast collection of problems focused on competitive programming-styled challenges, including but not limited to popular topics such as graph theory, dynamic programming. However, what separates our system with competitors, is that the users get instantaneous feedback, and hints, in the form of a chat bot powered by AI, similar to a technical interview. SystemWise aims to bridge the disconnect between pure theoretical knowledge and practical interview expertise.
 
-## Bullet points outlining how to fulfil "Required Elements"
+## Required Elements
 
-The application must use a modern frontend framework such as Angular, or Vue 3
+- We will be using Angular as the front-end framework
+- We will use Express to manage our back-end API
+- We will integrate LangChain API, and by proxy, OpenAI, Llama, Hugging Face, etc, to power instantaneous feedback when attempting problems.
+- We will use AWS EC2 to host our remote servers.
+- Users will be able to log in to their own accounts on OAuth 2.0 to track their progress.
 
+## Additional Requirements
 
-Bullet points outlining how to fulfil "Additional Requirements"
+- We will use webhook/websockets to faciliate an event driven architecture in order to communicate data between the front-end and back-end, regarding code execution and communication with a chatbot.
+- The backend will need to perform code execution, and code analysis in order to grade and provide the user feedback.
 
+## Alpha Version Milestones
 
-Your alpha version, beta version, and final version milestones
+- Front Page
+- User Auth
 
-For the Alpha version, we aim to achieve the following:
-We can do user-auth, some basic leader board, and like some small-problem set. And we could also implment solutions and maybe hints?
+## Beta Version Milestones
 
-For the Beta version, we aim to expand and refine the application:
-Not sure off the top of my head tbh 
+- Code execution
+- Grading
 
-For the Final version, we aim to deliver a polished and comprehensive platform:
+## Final Version Milestones
+
+- Chat bot communication
+- More problems
+- Leaderboards (Time permitting)
