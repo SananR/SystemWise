@@ -1,4 +1,4 @@
-# SystemWise
+![alt text](/doc/logo.png)
 
 ## Team Name
 
