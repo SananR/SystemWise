@@ -5,3 +5,4 @@ yarn-error.log
 coverage
 build/
 package-lock.json
+.idea
