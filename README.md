@@ -29,7 +29,7 @@ SystemWise is a specialized web application designed to help aspiring and experi
 
 - We will use webhooks to integrate with SendGrid
 - We will use websockets to faciliate an event driven architecture in order to communicate data between the front-end and back-end, regarding submission grading and communication with a chatbot.
-- The backend will need to utilize LangChain API in order to use LLMs such as GPT to power the submission grading, analysis and provide the user feedback. This is a long run tasking and will likely require a task queue.
+- The backend will need to utilize LangChain API in order to use LLMs such as GPT to power the submission grading, analysis and provide the user feedback. This is a long running task and will likely require a task queue.
 
 ## Alpha Version Milestones
 
