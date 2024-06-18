@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SubmitFormBtnComponent } from './components/submit-form-btn/submit-form-btn.component';
-import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { SignupFormComponent } from './components/form/signup-form/signup-form.component';
 
 @Component({
   selector: 'app-root',

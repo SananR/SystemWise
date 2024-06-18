@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import './_variables.scss';
+@import './_mixins.scss';
+
+body {
+  background-color: $background-color;
+  color: white;
+}
+
+html, body { height: 100%; font-size: 16px; }
+body { margin: 0; font-family: $fonts; }

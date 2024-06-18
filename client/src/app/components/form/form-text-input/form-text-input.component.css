@@ -1,0 +1,22 @@
+input {
+  background-color: #191a19;
+  color: white;
+}
+
+::-moz-placeholder {
+  color: rgb(167, 167, 167);
+}
+
+::placeholder {
+  color: rgb(167, 167, 167);
+}
+
+input:focus {
+  background-color: #1e5128;
+  color: white;
+}
+
+input:active {
+  background-color: #191a19;
+  color: white;
+}/*# sourceMappingURL=form-text-input.component.css.map */
