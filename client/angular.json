@@ -56,7 +56,7 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.css"
+              "src/sass/styles.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
