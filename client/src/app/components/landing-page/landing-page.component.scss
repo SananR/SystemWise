@@ -7,3 +7,15 @@
     $background-dark-lighter-color
   );
 }
+
+.container1 {
+  height: 50rem;
+  background: linear-gradient(90deg, $background-dark-lighter-color 0%, $background-dark-color  100%);
+  background: -moz-linear-gradient(90deg, $background-dark-lighter-color  0%, $background-dark-color 100%);
+  background: -webkit-linear-gradient(90deg, $background-dark-lighter-color  0%, $background-dark-color  100%);
+}
+
+.container2 {
+  height: 20rem;
+  background: $background-dark-color;
+}
