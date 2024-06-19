@@ -1,0 +1,34 @@
+<mat-toolbar
+  class="d-flex gap-2 bg-transparent justify-content-center align-items-center"
+>
+  <app-logo class="h-100"></app-logo>
+  <button
+    class="page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white"
+  >
+    Explore Problems
+  </button>
+  <button
+    class="page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white"
+  >
+    Guides
+  </button>
+  <button
+    class="page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white"
+  >
+    Leaderboards
+  </button>
+
+  <button
+    class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"
+    style="font-weight: 500"
+  >
+    Sign In
+  </button>
+  <button
+    class="signup-button btn btn-primary btn-lg d-flex justify-content-center align-items-center fs-6"
+    style="font-weight: 500"
+    (click)="goToPage('signup')"
+  >
+    Start Practicing
+  </button>
+</mat-toolbar>

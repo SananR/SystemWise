@@ -1,0 +1,9 @@
+@import "../../../sass/_variables.scss";
+
+.main {
+  background: linear-gradient(
+    to bottom right,
+    $background-dark-color,
+    $background-dark-lighter-color
+  );
+}
