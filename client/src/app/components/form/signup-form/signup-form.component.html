@@ -1,4 +1,5 @@
 <form>
+  <h1>Sign up to get started.</h1>
   <div class="form-group">
     <label>Email address</label>
     <app-form-text-input
@@ -7,7 +8,23 @@
   </div>
   <div class="form-group">
     <label>Password</label>
-    <app-form-text-input></app-form-text-input>
+    <app-form-text-input [type]="'password'"></app-form-text-input>
+  </div>
+  <div class="form-group">
+    <label>Confirm Password</label>
+    <app-form-text-input [type]="'password'"></app-form-text-input>
   </div>
   <app-form-btn>Submit</app-form-btn>
+  <div class="divider">
+    <mat-divider class="submit-divider-left"></mat-divider>
+    or
+    <mat-divider class="submit-divider-right"></mat-divider>
+  </div>
+  <div class="form-group">
+    <app-form-btn
+      [label]="'Sign up with Google'"
+      [isIconHidden]="false"
+      [icon]="'fa-brands fa-google'"
+    ></app-form-btn>
+  </div>
 </form>

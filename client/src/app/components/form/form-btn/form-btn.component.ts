@@ -9,4 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class FormBtnComponent {
   @Input() label: string = 'Submit';
+  @Input() isIconHidden: boolean = true;
+  @Input() icon: string = '';
 }

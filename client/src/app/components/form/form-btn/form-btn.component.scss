@@ -2,5 +2,22 @@
 
 button {
   background-color: $secondary-color;
-  width: 1em,
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  background-color: lighten($secondary-color, 5%);
+}
+
+button:active {
+  background-color: $primary-color !important;
+}
+
+span {
+  position: absolute;
+  margin-right: 18rem;
 }

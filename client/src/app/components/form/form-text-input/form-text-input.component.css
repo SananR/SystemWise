@@ -1,6 +1,7 @@
 input {
   background-color: #191a19;
   color: white;
+  margin-bottom: 1em;
 }
 
 ::-moz-placeholder {
@@ -12,8 +13,12 @@ input {
 }
 
 input:focus {
-  background-color: #1e5128;
+  border-color: #1e5128;
+  background-color: #191a19;
   color: white;
+  outline: 1px solid #4e9f3d;
+  box-shadow: none;
+  outline-offset: 0;
 }
 
 input:active {

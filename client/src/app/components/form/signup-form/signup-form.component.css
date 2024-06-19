@@ -1,1 +1,24 @@
-/*# sourceMappingURL=signup-form.component.css.map */
+form {
+  width: 20rem;
+}
+
+h1 {
+  margin: 4rem 0 2rem 0;
+}
+
+.divider {
+  margin: 1rem 0.5rem 1rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-divider-left {
+  width: 60%;
+  margin-right: 10%;
+}
+
+.submit-divider-right {
+  width: 60%;
+  margin-left: 10%;
+}/*# sourceMappingURL=signup-form.component.css.map */

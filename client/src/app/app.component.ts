@@ -8,8 +8,6 @@ import { LandingPageComponent } from "./landing-page/landing-page.component";
   standalone: true,
   imports: [RouterOutlet, LandingPageComponent, SignupFormComponent],
   template: `
-    <h1>Welcome to {{ title }}!</h1>
-    <app-signup-form></app-signup-form>
     <router-outlet />
   `,
   styles: [],

@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FormTextInputComponent {
   @Input() placeholder: string = "";
+  @Input() type: string = "text";
 }
