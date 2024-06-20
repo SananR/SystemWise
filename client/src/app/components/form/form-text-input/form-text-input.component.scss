@@ -1,37 +1,26 @@
 @import "../../../../sass/_variables.scss";
 
-input {
-  background-color: $background-dark-color;
-  color: white;
-  margin-bottom: 1em;
+.form-textinput {
+  background-color: $background-dark-lighter-color;
 }
 
 ::placeholder {
   color: $placeholder-color;
 }
 
-input:focus {
+.form-textinput:focus {
   border-color: $primary-color;
-  background-color: $background-dark-color;
-  color: white;
-  outline: 1px solid $secondary-color;
+  background-color: $background-dark-lighter-color;
+  box-shadow: none;
 }
 ::-moz-placeholder {
-  color: rgb(167, 167, 167);
+  color: $placeholder-color;
 }
 
 ::placeholder {
-  color: rgb(167, 167, 167);
+  color: $placeholder-color;
 }
 
-input:focus {
-  border-color: #1e5128;
-  background-color: #191a19;
-  color: white;
-  outline: 1px solid #4e9f3d;
-}
-
-input:active {
-  background-color: #191a19;
-  color: white;
+.form-textinput:active {
+  background-color: $background-dark-lighter-color;
 }

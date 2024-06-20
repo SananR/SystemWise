@@ -1,23 +1,31 @@
-@import "../../../../sass/_variables.scss";
+@import "../../../../sass/variables";
 
-button {
-  background-color: $secondary-color;
-  width: 100%;
+.btn-primary {
+  background-color: $primary-color;
   border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-button:hover {
-  background-color: lighten($secondary-color, 5%);
+.btn-primary:hover {
+  background-color: lighten($primary-color, 5%);
 }
 
-button:active {
+.btn-primary:active {
   background-color: $primary-color !important;
 }
 
-span {
+.btn-google {
+  background-color: $google-blue;
+}
+
+.btn-google:hover {
+  background-color: lighten($google-blue, 5%);
+}
+
+.btn-google:active {
+  background-color: $google-blue !important;
+}
+
+.icon-container {
   position: absolute;
-  margin-right: 18rem;
+  left: 1em;
 }

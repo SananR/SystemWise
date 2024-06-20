@@ -1,5 +1,9 @@
-<button type="submit" class="btn btn-primary">
-  <span>
+<button
+  type="submit"
+  class="btn btn-primary w-100 d-flex justify-content-center align-items-center position-relative"
+  [ngClass]="additionalClasses"
+>
+  <span class="icon-container">
     <i [class]="icon" [hidden]="isIconHidden"></i>
   </span>
   <div class="align-middle">
