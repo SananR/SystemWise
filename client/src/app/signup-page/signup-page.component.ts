@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
-import { SignupFormComponent } from '../components/form/signup-form/signup-form.component';
+import { Component } from "@angular/core";
+import { SignupFormComponent } from "../components/form/signup-form/signup-form.component";
+import { ToolbarComponent } from "../components/toolbar/toolbar.component";
 
 @Component({
-  selector: 'app-signup-page',
+  selector: "app-signup-page",
   standalone: true,
-  imports: [SignupFormComponent],
-  templateUrl: './signup-page.component.html',
-  styleUrl: './signup-page.component.scss'
+  imports: [SignupFormComponent, ToolbarComponent],
+  templateUrl: "./signup-page.component.html",
+  styleUrl: "./signup-page.component.scss",
 })
-export class SignupPageComponent {
-  
-}
+export class SignupPageComponent {}
