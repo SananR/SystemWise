@@ -1,7 +1,7 @@
-@import "../../../../sass/_variables.scss";
+@import '../../../../sass/_variables.scss';
 
 input {
-  background-color: $background-dark-color;
+  background-color: $background-color;
   color: white;
   margin-bottom: 1em;
 }
@@ -12,24 +12,9 @@ input {
 
 input:focus {
   border-color: $primary-color;
-  background-color: $background-dark-color;
+  background-color: $background-color;
   color: white;
-  outline: 1px solid $background-dark-lighter-color;
-}
-
-::-moz-placeholder {
-  color: rgb(167, 167, 167);
-}
-
-::placeholder {
-  color: rgb(167, 167, 167);
-}
-
-input:focus {
-  border-color: #1e5128;
-  background-color: #191a19;
-  color: white;
-  outline: 1px solid #4e9f3d;
+  outline: 1px solid $secondary-color;
   box-shadow: none;
   outline-offset: 0;
 }
