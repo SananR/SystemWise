@@ -1,19 +1,21 @@
 import { Component } from "@angular/core";
 import { ToolbarComponent } from "../toolbar/toolbar.component";
-import { HostListener } from "@angular/core";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import {
+  faBoltLightning,
+  faBrain,
+  faPeopleGroup,
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-landing-page",
   standalone: true,
-  imports: [ToolbarComponent],
+  imports: [ToolbarComponent, FontAwesomeModule],
   templateUrl: "./landing-page.component.html",
   styleUrl: "./landing-page.component.scss",
 })
 export class LandingPageComponent {
-
-  @HostListener("window:scroll", []) onWindowScroll() {
-    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-      console.log("scrolling");  
-    }
-  } 
+  faBolt = faBoltLightning;
+  faBrain = faBrain;
+  faPeopleGroup = faPeopleGroup;
 }

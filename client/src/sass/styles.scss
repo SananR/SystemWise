@@ -23,8 +23,18 @@ $theme-colors: map-merge(
   $theme-colors,
   (
     "primary": $primary-color,
+    "dark": $background-dark-color,
   )
 );
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop(
+  $utilities-colors,
+  rgba-css-var,
+  "$key",
+  "text"
+);
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 // Set/override above bootstrap changes, do not remove
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
