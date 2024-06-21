@@ -1,5 +1,8 @@
 <input
-  class="form-control text-light mb-3 form-textinput"
+  class="form-control text-light form-textinput"
   [attr.placeholder]="placeholder"
   [attr.type]="type"
+  (input)="onInput($event)"
+  [value]="value"
+  [ngClass]="additionalClasses"
 />

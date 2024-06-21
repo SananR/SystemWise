@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { CommonModule } from '@angular/common';
 
 
@@ -16,4 +16,10 @@ export class FormBtnComponent {
   @Input() isIconHidden: boolean = true;
   @Input() icon: string = "";
   @Input() additionalClasses: string = "";
+
+  @Output() buttonClick: EventEmitter<Event> = new EventEmitter<Event>();
+
+  handleClick() {
+    this.buttonClick.emit();
+  }
 }
