@@ -1,15 +1,15 @@
 @import "../../../../sass/variables";
 
-.btn-primary {
+.btn {
   background-color: $primary-color;
   border: none;
 }
 
-.btn-primary:hover {
+.btn:hover {
   background-color: lighten($primary-color, 5%);
 }
 
-.btn-primary:active {
+.btn:active {
   background-color: $primary-color !important;
 }
 
@@ -26,6 +26,5 @@
 }
 
 .icon-container {
-  position: absolute;
   left: 1em;
 }

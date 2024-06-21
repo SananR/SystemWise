@@ -17,10 +17,6 @@
   color: $placeholder-color;
 }
 
-::placeholder {
-  color: $placeholder-color;
-}
-
 .form-textinput:active {
   background-color: $background-dark-lighter-color;
 }
