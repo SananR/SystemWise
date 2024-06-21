@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+@import "./_variables.scss";
+@import "./_mixins.scss";
+
+body {
+  background-color: $background-dark-color !important;
+  color: white !important;
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: $fonts;
+}
+
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "primary": $primary-color,
+    "dark": $background-dark-color,
+  )
+);
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop(
+  $utilities-colors,
+  rgba-css-var,
+  "$key",
+  "text"
+);
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+
+// Set/override above bootstrap changes, do not remove
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";

@@ -1,0 +1,13 @@
+<button
+  class="btn btn-primary w-100 d-flex justify-content-center align-items-center position-relative"
+  [ngClass]="additionalClasses"
+  (click)="handleClick()"
+  [disabled]="isDisabled"
+>
+  <span class="icon-container position-absolute">
+    <i [class]="icon" [hidden]="isIconHidden"></i>
+  </span>
+  <div class="align-middle">
+    {{ label }}
+  </div>
+</button>
