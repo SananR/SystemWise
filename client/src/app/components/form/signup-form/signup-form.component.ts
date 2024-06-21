@@ -30,6 +30,10 @@ export class SignupFormComponent {
   getEmailControlClass() {
     return this.validateEmail(this.emailValue) && this.emailValue.length > 0 ? 'border-danger' : '';
   }
+
+  isFormValid() {
+    return this.passwordValue.length >= 8 && this.passwordValue === this.confirmPasswordValue && this.validateEmail(this.emailValue);
+  }
   
   handleSignUpButtonClick() {
 

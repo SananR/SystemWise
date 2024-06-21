@@ -16,10 +16,13 @@ export class FormBtnComponent {
   @Input() isIconHidden: boolean = true;
   @Input() icon: string = "";
   @Input() additionalClasses: string = "";
+  @Input() isDisabled: boolean = false;
 
   @Output() buttonClick: EventEmitter<Event> = new EventEmitter<Event>();
 
   handleClick() {
-    this.buttonClick.emit();
+    if (!this.isDisabled) {
+      this.buttonClick.emit();
+    }
   }
 }

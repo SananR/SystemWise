@@ -2,6 +2,7 @@
   class="btn btn-primary w-100 d-flex justify-content-center align-items-center position-relative"
   [ngClass]="additionalClasses"
   (click)="handleClick()"
+  [disabled]="isDisabled"
 >
   <span class="icon-container">
     <i [class]="icon" [hidden]="isIconHidden"></i>

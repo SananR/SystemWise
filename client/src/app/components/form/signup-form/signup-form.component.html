@@ -61,6 +61,7 @@
   <app-form-btn
     [label]="'Sign up'"
     (buttonClick)="handleSignUpButtonClick()"
+    [isDisabled]="!isFormValid()"
   ></app-form-btn>
   <div class="d-flex justify-content-center align-items-center my-3">
     <mat-divider
