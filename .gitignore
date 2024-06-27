@@ -6,3 +6,4 @@ coverage
 build/
 package-lock.json
 .idea
+.DS_Store
