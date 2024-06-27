@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { SignupFormComponent } from "./components/form/signup-form/signup-form.component";
+import { LandingPageComponent } from "./components/landing-page/landing-page.component";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet],
-  template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
-  `,
+  imports: [RouterOutlet, LandingPageComponent, SignupFormComponent],
+  template: ` <router-outlet /> `,
   styles: [],
 })
 export class AppComponent {
-  title = 'SystemWise';
+  title = "SystemWise";
 }

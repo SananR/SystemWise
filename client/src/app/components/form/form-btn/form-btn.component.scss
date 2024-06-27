@@ -1,0 +1,30 @@
+@import "../../../../sass/variables";
+
+.btn {
+  background-color: $primary-color;
+  border: none;
+}
+
+.btn:hover {
+  background-color: lighten($primary-color, 5%);
+}
+
+.btn:active {
+  background-color: $primary-color !important;
+}
+
+.btn-google {
+  background-color: $google-blue;
+}
+
+.btn-google:hover {
+  background-color: lighten($google-blue, 5%);
+}
+
+.btn-google:active {
+  background-color: $google-blue !important;
+}
+
+.icon-container {
+  left: 1em;
+}

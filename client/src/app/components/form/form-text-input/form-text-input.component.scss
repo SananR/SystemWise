@@ -1,0 +1,22 @@
+@import "../../../../sass/_variables.scss";
+
+.form-textinput {
+  background-color: $background-dark-lighter-color;
+}
+
+::placeholder {
+  color: $placeholder-color;
+}
+
+.form-textinput:focus {
+  border-color: $primary-color;
+  background-color: $background-dark-lighter-color;
+  box-shadow: none;
+}
+::-moz-placeholder {
+  color: $placeholder-color;
+}
+
+.form-textinput:active {
+  background-color: $background-dark-lighter-color;
+}
