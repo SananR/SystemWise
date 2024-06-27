@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormTextInputComponent } from "../form-text-input/form-text-input.component";
 import { FormBtnComponent } from "../form-btn/form-btn.component";
 import { MatDividerModule } from "@angular/material/divider";
-import { FormControl, FormGroup, FormsModule, Validators } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 
 @Component({
