@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ToolbarComponent } from "../toolbar/toolbar.component";
+import { ToolbarComponent } from "../../components/toolbar/toolbar.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
   faBoltLightning,

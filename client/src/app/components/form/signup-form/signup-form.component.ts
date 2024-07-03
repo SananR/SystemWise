@@ -1,9 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormTextInputComponent } from "../form-text-input/form-text-input.component";
 import { FormBtnComponent } from "../form-btn/form-btn.component";
 import { MatDividerModule } from "@angular/material/divider";
-import { FormControl, FormGroup, FormsModule, Validators } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { UserAuthService } from "../../../services/user-auth.service";
 
 @Component({
   selector: "app-signup-form",
@@ -17,10 +18,17 @@ import { CommonModule } from "@angular/common";
   styleUrl: "./signup-form.component.scss",
 })
 
-export class SignupFormComponent {
+export class SignupFormComponent implements OnInit {
+
+  constructor(private api: UserAuthService) { }
+
+  ngOnInit(): void {}
+
+  usernameValue: string = '';
   emailValue: string = '';
   passwordValue: string = '';
   confirmPasswordValue: string = '';
+  invalidSignupCredentials: boolean = false;
   
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,16 +44,24 @@ export class SignupFormComponent {
   }
   
   handleSignUpButtonClick() {
-
-    alert('submit form!');
+    this.api.signUp(this.usernameValue, this.emailValue, this.passwordValue).subscribe({
+      next: (res) => {
+        if (res.error) {
+          this.invalidSignupCredentials = true;
+        }
+      }
+    });
   }
-
   handleGoogleAuthButtonClick() {
     alert('google oauth button clicked!');
   }
 
   handleEmailValueChange(value: string) {
     this.emailValue = value;
+  }
+
+  handleUsernameValueChange(value: string) {
+    this.usernameValue = value;
   }
 
   handlePasswordValueChange(value: string) {
