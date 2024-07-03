@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { SignupFormComponent } from "./components/form/signup-form/signup-form.component";
-import { LandingPageComponent } from "./components/landing-page/landing-page.component";
+import { SignupPageComponent } from "./pages/signup-page/signup-page.component";
+import { LandingPageComponent } from "./pages/landing-page/landing-page.component";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, LandingPageComponent, SignupFormComponent],
+  imports: [RouterOutlet, LandingPageComponent, SignupPageComponent],
   template: ` <router-outlet /> `,
   styles: [],
 })

@@ -1,5 +1,14 @@
 <form class="shadow px-5 py-4 w-100 signup-form">
   <h1 class="mb-4">Sign up to get started.</h1>
+  <small *ngIf="invalidSignupCredentials" class="text-danger fs-8 mb-4">
+    Invalid signup credentials.
+  </small>
+  <div class="form-group mb-2">
+    <label>Username</label>
+    <app-form-text-input
+      (valueChange)="handleUsernameValueChange($event)"
+    ></app-form-text-input>
+  </div>
   <div class="form-group mb-2">
     <label>Email address</label>
     <app-form-text-input
