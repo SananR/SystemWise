@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { LoginFormComponent } from "../components/form/login-form/login-form.component";
-import { ToolbarComponent } from "../components/toolbar/toolbar.component";
+import { LoginFormComponent } from "../../components/form/login-form/login-form.component";
+import { ToolbarComponent } from "../../components/toolbar/toolbar.component";
 
 
 @Component({
