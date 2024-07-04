@@ -1,0 +1,38 @@
+---
+version: "3.8"
+services:
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - my-net
+  backend:
+    depends_on:
+      - redis
+    container_name: backend
+    hostname: backend
+    image: systemwisebackend:latest
+    build: ./server
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - my-net
+  frontend:
+    depends_on:
+      - backend
+    container_name: frontend
+    hostname: frontend
+    image: systemwisefrontend:latest
+    build: ./client
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - my-net
+
+networks:
+  my-net:
