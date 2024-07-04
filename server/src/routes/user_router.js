@@ -1,6 +1,7 @@
 import { User } from '../models/user.js';
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
+import { isAuthenticated } from '../../middleware/auth.js';
 
 export const usersRouter = Router();
 
@@ -42,6 +43,7 @@ usersRouter.post('/signup', async (req, res) => {
     };
     return res.json(response);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ error: 'User creation failed.' });
   }
 });
@@ -69,14 +71,19 @@ usersRouter.post('/login', async (req, res) => {
   return res.status(200).json({ username: user.username, email: user.email });
 });
 
-usersRouter.get('/me', async (req, res) => {
-  if (!req.session.userId) {
-    return res.status(400).json({ error: 'Bad request' });
+usersRouter.get('/me', isAuthenticated, async (req, res) => {
+  try {
+    if (!req.session.userId) {
+      return res.status(400).json({ error: 'Bad request' });
+    }
+    const user = await User.findOne({ username: req.session.userId });
+    if (!user) {
+      return res.status(400).json({ error: 'Bad request' });
+    }
+    const response = { username: user.username };
+    return res.json(response);
+  } catch (error) {
+    console.error('Get user error:', error);
+    return res.status(500).json({ error: 'Failed to fetch user.', details: error.message });
   }
-  const user = await User.findOne({ username: req.session.userId });
-  if (!user) {
-    return res.status(400).json({ error: 'Bad request' });
-  }
-  const response = { username: user.username };
-  return res.json(response);
 });
