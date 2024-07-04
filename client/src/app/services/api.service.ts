@@ -10,20 +10,20 @@ export class ApiService {
   private endpoint = environment.apiEndpoint || "http://localhost:3000";
 
   post<T>(url: string, body: any, headers?: HttpHeaders) {
-    const options = { headers };
+    const options = { headers, withCredentials: true };
     return this.http.post<T>(this.endpoint + url, body, options);
   }
 
   get<T>(url: string, params?: HttpParams, headers?: HttpHeaders) {
-    const options = { params, headers };
+    const options = { params, headers, withCredentials: true };
     return this.http.get<T>(this.endpoint + url, options);
   }
 
   put<T>(url: string, body: any) {
-    return this.http.put<T>(url, body);
+    return this.http.put<T>(url, body, { withCredentials: true });
   }
 
   delete<T>(url: string) {
-    return this.http.delete<T>(url);
+    return this.http.delete<T>(url, { withCredentials: true });
   }
 }

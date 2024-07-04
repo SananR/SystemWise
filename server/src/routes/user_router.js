@@ -35,7 +35,7 @@ usersRouter.post('/signup', async (req, res) => {
   });
   try {
     const jsonResponse = await user.save();
-    req.session.userId = jsonResponse._id;
+    req.session.userId = jsonResponse.username;
     const response = {
       username: jsonResponse.username,
       email: jsonResponse.email,
@@ -67,4 +67,16 @@ usersRouter.post('/login', async (req, res) => {
   }
   req.session.user_email = user.email;
   return res.status(200).json({ username: user.username, email: user.email });
+});
+
+usersRouter.get('/me', async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+  const user = await User.findOne({ username: req.session.userId });
+  if (!user) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+  const response = { username: user.username };
+  return res.json(response);
 });

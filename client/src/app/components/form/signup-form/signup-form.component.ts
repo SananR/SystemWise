@@ -5,6 +5,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { UserAuthService } from "../../../services/user-auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup-form",
@@ -20,7 +21,7 @@ import { UserAuthService } from "../../../services/user-auth.service";
 
 export class SignupFormComponent implements OnInit {
 
-  constructor(private api: UserAuthService) { }
+  constructor(private api: UserAuthService, private router: Router) { }
 
   ngOnInit(): void {}
 
@@ -48,6 +49,8 @@ export class SignupFormComponent implements OnInit {
       next: (res) => {
         if (res.error) {
           this.invalidSignupCredentials = true;
+        } else {
+          this.router.navigate([`/`]);
         }
       }
     });
@@ -70,5 +73,9 @@ export class SignupFormComponent implements OnInit {
 
   handleConfirmPasswordValueChange(value: string) {
     this.confirmPasswordValue = value;
+  }
+
+  handleSignInButtonClick() {
+    this.router.navigate(['/login']);
   }
 }

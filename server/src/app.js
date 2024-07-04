@@ -34,8 +34,6 @@ try {
   authStore = new RedisStore({
     client: redisClient,
     prefix: 'auth:',
-    resave: false, // required: force lightweight session keep alive (touch)
-    saveUninitialized: false, // recommended: only save session when data exists
   });
 } catch (error) {
   console.error(error);
@@ -46,7 +44,7 @@ app.use(
     store: authStore,
     secret: process.env.SESSION_SECRET_KEY,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 

@@ -7,6 +7,12 @@ interface SignupResponse {
   username?: string;
 }
 
+interface MeResponse {
+  success: boolean;
+  error?: string;
+  username?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,5 +34,9 @@ export class UserRepositoryService {
       username: username,
       password: password,
     });
+  }
+
+  me() {
+    return this.api.get<MeResponse>(`/api/users/me`);
   }
 }
