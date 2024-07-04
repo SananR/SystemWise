@@ -10,53 +10,61 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-signup-form",
   standalone: true,
-  imports: [FormTextInputComponent, 
-            FormBtnComponent, 
-            MatDividerModule, 
-            CommonModule, 
-            FormsModule],
+  imports: [
+    FormTextInputComponent,
+    FormBtnComponent,
+    MatDividerModule,
+    CommonModule,
+    FormsModule,
+  ],
   templateUrl: "./signup-form.component.html",
   styleUrl: "./signup-form.component.scss",
 })
-
 export class SignupFormComponent implements OnInit {
-
-  constructor(private api: UserAuthService, private router: Router) { }
+  constructor(private api: UserAuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  usernameValue: string = '';
-  emailValue: string = '';
-  passwordValue: string = '';
-  confirmPasswordValue: string = '';
+  usernameValue: string = "";
+  emailValue: string = "";
+  passwordValue: string = "";
+  confirmPasswordValue: string = "";
   invalidSignupCredentials: boolean = false;
-  
+
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
   getEmailControlClass() {
-    return this.validateEmail(this.emailValue) && this.emailValue.length > 0 ? 'border-danger' : '';
+    return this.validateEmail(this.emailValue) && this.emailValue.length > 0
+      ? "border-danger"
+      : "";
   }
 
   isFormValid() {
-    return this.passwordValue.length >= 8 && this.passwordValue === this.confirmPasswordValue && this.validateEmail(this.emailValue);
+    return (
+      this.passwordValue.length >= 8 &&
+      this.passwordValue === this.confirmPasswordValue &&
+      this.validateEmail(this.emailValue)
+    );
   }
-  
+
   handleSignUpButtonClick() {
-    this.api.signUp(this.usernameValue, this.emailValue, this.passwordValue).subscribe({
-      next: (res) => {
-        if (res.error) {
-          this.invalidSignupCredentials = true;
-        } else {
-          this.router.navigate([`/`]);
-        }
-      }
-    });
+    this.api
+      .signUp(this.usernameValue, this.emailValue, this.passwordValue)
+      .subscribe({
+        next: (res) => {
+          if (res.error) {
+            this.invalidSignupCredentials = true;
+          } else {
+            this.router.navigate([`/`]);
+          }
+        },
+      });
   }
   handleGoogleAuthButtonClick() {
-    alert('google oauth button clicked!');
+    alert("google oauth button clicked!");
   }
 
   handleEmailValueChange(value: string) {
@@ -76,6 +84,6 @@ export class SignupFormComponent implements OnInit {
   }
 
   handleSignInButtonClick() {
-    this.router.navigate(['/login']);
+    this.router.navigate(["/login"]);
   }
 }

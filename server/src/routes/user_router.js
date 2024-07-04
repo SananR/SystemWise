@@ -7,12 +7,19 @@ export const usersRouter = Router();
 
 usersRouter.post('/signup', async (req, res) => {
   try {
-    if (!req.body || !req.body.password || !req.body.email || !req.body.username) {
+    if (
+      !req.body ||
+      !req.body.password ||
+      !req.body.email ||
+      !req.body.username
+    ) {
       res.status(400).json({ error: 'All fields are required' });
       return;
     }
     const existingUserEmail = await User.findOne({ email: req.body.email });
-    const existingUserName = await User.findOne({ username: req.body.username });
+    const existingUserName = await User.findOne({
+      username: req.body.username,
+    });
 
     if (existingUserName || existingUserEmail) {
       return res.status(422).json({ error: 'User already exists' });
@@ -35,7 +42,9 @@ usersRouter.post('/signup', async (req, res) => {
     return res.json(response);
   } catch (error) {
     console.error('Signup error:', error);
-    return res.status(500).json({ error: 'User creation failed.', details: error.message });
+    return res
+      .status(500)
+      .json({ error: 'User creation failed.', details: error.message });
   }
 });
 
@@ -63,7 +72,9 @@ usersRouter.post('/login', async (req, res) => {
     return res.status(200).json({ username: user.username, email: user.email });
   } catch (error) {
     console.error('Login error:', error);
-    return res.status(500).json({ error: 'Login failed.', details: error.message });
+    return res
+      .status(500)
+      .json({ error: 'Unexpected error occurred.', details: error.message });
   }
 });
 
@@ -80,6 +91,8 @@ usersRouter.get('/me', isAuthenticated, async (req, res) => {
     return res.json(response);
   } catch (error) {
     console.error('Get user error:', error);
-    return res.status(500).json({ error: 'Failed to fetch user.', details: error.message });
+    return res
+      .status(500)
+      .json({ error: 'Failed to fetch user.', details: error.message });
   }
 });
