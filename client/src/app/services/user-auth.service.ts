@@ -38,6 +38,15 @@ export class UserAuthService {
   }
 
   signUpWithGoogle(idToken: string, email: string, name: string) {
-    return this.user.signUpWithGoogle(idToken, email, name);
+    return this.user.signUpWithGoogle(idToken, email, name).pipe(
+      catchError((e) => {
+        return of({ success: false, error: e.error });
+      }),
+      tap((res) => {
+        if (!res.error) {
+          this.isLoggedIn.next(true);
+        }
+      })
+    );
   }
 }

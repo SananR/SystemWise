@@ -82,7 +82,10 @@
     ></mat-divider>
   </div>
   <div class="form-group md-flex">
-    <app-google-auth-btn [text]="'signup_with'"></app-google-auth-btn>
+    <app-google-auth-btn
+      [text]="'signup_with'"
+      (buttonClick)="handleGoogleSignup($event)"
+    ></app-google-auth-btn>
   </div>
   <div class="d-flex mt-3 justify-content-center">
     <div class="mt-3 text-secondary">

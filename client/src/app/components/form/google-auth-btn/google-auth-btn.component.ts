@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
@@ -7,8 +7,6 @@ import {
   SocialUser,
   GoogleSigninButtonModule,
 } from "@abacritt/angularx-social-login";
-import { UserAuthService } from "../../../services/user-auth.service";
-import { ApiService } from "../../../services/api.service";
 
 type ButtonTextType = "signin_with" | "signup_with" | "continue_with";
 
@@ -46,22 +44,16 @@ type ButtonTextType = "signin_with" | "signup_with" | "continue_with";
 export class GoogleAuthBtnComponent {
   @Input() text: ButtonTextType = "signin_with";
 
-  user: SocialUser | undefined;
-  loggedIn: boolean | undefined;
-  isLoggedin?: boolean = undefined;
+  @Output() buttonClick: EventEmitter<SocialUser> =
+    new EventEmitter<SocialUser>();
+  @Output() user: SocialUser | undefined;
 
-  constructor(
-    private ssoService: SocialAuthService,
-    private userApi: UserAuthService
-  ) {}
+  constructor(private ssoService: SocialAuthService) {}
 
   ngOnInit() {
     this.ssoService.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = user != null;
-      this.userApi
-        .signUpWithGoogle(user.idToken, user.email, user.name)
-        .subscribe();
+      this.buttonClick.emit(user);
     });
   }
 }
