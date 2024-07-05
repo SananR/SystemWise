@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { Injectable } from "@angular/core";
+import { ApiService } from "../services/api.service";
 
 interface SignupResponse {
   success: boolean;
@@ -14,11 +14,9 @@ interface MeResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-
 export class UserRepositoryService {
-
   constructor(private api: ApiService) {}
 
   signUp(username: string, email: string, password: string) {
@@ -38,5 +36,13 @@ export class UserRepositoryService {
 
   me() {
     return this.api.get<MeResponse>(`/api/users/me`);
+  }
+
+  signUpWithGoogle(idToken: string, email: string, name: string) {
+    return this.api.post<SignupResponse>(`/api/users/signup/google`, {
+      idToken: idToken,
+      email: email,
+      name: name,
+    });
   }
 }

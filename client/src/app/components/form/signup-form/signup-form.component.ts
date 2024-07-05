@@ -6,6 +6,7 @@ import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { UserAuthService } from "../../../services/user-auth.service";
 import { Router } from "@angular/router";
+import { GoogleAuthBtnComponent } from "../google-auth-btn/google-auth-btn.component";
 
 @Component({
   selector: "app-signup-form",
@@ -14,16 +15,19 @@ import { Router } from "@angular/router";
             FormBtnComponent, 
             MatDividerModule, 
             CommonModule, 
-            FormsModule],
+            FormsModule,
+            GoogleAuthBtnComponent
+            ],
   templateUrl: "./signup-form.component.html",
   styleUrl: "./signup-form.component.scss",
 })
 
 export class SignupFormComponent implements OnInit {
 
-  constructor(private api: UserAuthService, private router: Router) { }
+  constructor(private api: UserAuthService, 
+              private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit() { }
 
   usernameValue: string = '';
   emailValue: string = '';
@@ -54,9 +58,6 @@ export class SignupFormComponent implements OnInit {
         }
       }
     });
-  }
-  handleGoogleAuthButtonClick() {
-    alert('google oauth button clicked!');
   }
 
   handleEmailValueChange(value: string) {

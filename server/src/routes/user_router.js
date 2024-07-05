@@ -1,9 +1,13 @@
 import { User } from '../models/user.js';
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
+import { OAuth2Client } from 'google-auth-library';
+import 'dotenv/config';
+import crypto from 'crypto';
 
 export const usersRouter = Router();
 
+const client = new OAuth2Client();
 usersRouter.post('/signup', async (req, res) => {
   if (
     !req.body ||
@@ -28,11 +32,17 @@ usersRouter.post('/signup', async (req, res) => {
 
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);
+  const auth = {
+    type: 'regular',
+    password: bcrypt.hashSync(req.body.password, salt),
+  };
+
   const user = new User({
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, salt),
     username: req.body.username,
+    auth: auth,
   });
+
   try {
     const jsonResponse = await user.save();
     req.session.userId = jsonResponse.username;
@@ -79,4 +89,51 @@ usersRouter.get('/me', async (req, res) => {
   }
   const response = { username: user.username };
   return res.json(response);
+});
+
+usersRouter.post('/signup/google', async (req, res) => {
+  if (!req.body || !req.body.idToken || !req.body.email || !req.body.name) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+  const idToken = req.body.idToken;
+
+  const existingEmail = await User.findOne({ email: req.body.email });
+  if (existingEmail) {
+    return res.status(422).json({ error: 'Unprocessable entity' });
+  }
+
+  const ticket = await client.verifyIdToken({
+    idToken: idToken,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
+
+  const payload = ticket.getPayload();
+
+  const hash = crypto.createHash('md5').update(payload.sub).digest('hex');
+  var k = 5;
+  var username = payload.given_name + payload.family_name + hash.slice(0, k);
+  var user;
+
+  while (k < hash.length) {
+    user = await User.findOne({ username: username });
+    if (!user) {
+      const newUser = new User({
+        username: username,
+        email: payload.email,
+        auth: {
+          type: 'oauth',
+          provider: 'GOOGLE',
+        },
+      });
+      const result = await newUser.save();
+      req.session.userId = result.username;
+      return res
+        .status(200)
+        .json({ username: result.username, email: result.email });
+    }
+    k += 1;
+    username = payload.given_name + payload.family_name + hash.slice(0, k);
+  }
+
+  return res.status(422).json({ error: 'Unprocessable entity' });
 });
