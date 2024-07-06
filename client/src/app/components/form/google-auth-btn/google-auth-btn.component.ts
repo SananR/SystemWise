@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { environment } from "../../../../environment/environment";
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
@@ -24,13 +25,10 @@ type ButtonTextType = "signin_with" | "signup_with" | "continue_with";
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              "32525365924-p5gpecl4fe0gt6uml5jn6cc8dqgcmmrr.apps.googleusercontent.com",
-              {
-                scopes: "openid profile email",
-                oneTapEnabled: false,
-              }
-            ),
+            provider: new GoogleLoginProvider(environment.googleClientId, {
+              scopes: "openid profile email",
+              oneTapEnabled: false,
+            }),
           },
         ],
         onError: (err) => {
