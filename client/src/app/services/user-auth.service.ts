@@ -1,6 +1,6 @@
-import { Injectable, inject } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { UserRepositoryService } from "../repositories/user-repository.service";
-import { tap, BehaviorSubject, first, catchError, of } from "rxjs";
+import { tap, BehaviorSubject, catchError, of } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -37,7 +37,10 @@ export class UserAuthService {
   }
 
   signOut() {
-    return this.user.signOut().pipe(catchError((e) => {
-      return of({ error: e })}));
+    return this.user.signOut().pipe(
+      catchError((e) => {
+        return of({ error: e });
+      })
+    );
   }
 }
