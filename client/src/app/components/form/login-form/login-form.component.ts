@@ -6,6 +6,8 @@ import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { UserAuthService } from "../../../services/user-auth.service";
 import { Router } from "@angular/router";
+import { GoogleAuthBtnComponent } from "../google-auth-btn/google-auth-btn.component";
+import { SocialUser } from "@abacritt/angularx-social-login";
 
 @Component({
   selector: "app-login-form",
@@ -16,6 +18,7 @@ import { Router } from "@angular/router";
     MatDividerModule,
     CommonModule,
     FormsModule,
+    GoogleAuthBtnComponent,
   ],
   templateUrl: "./login-form.component.html",
   styleUrls: ["./login-form.component.scss"],
@@ -25,7 +28,10 @@ export class LoginFormComponent {
   passwordValue: string = "";
   invalidCredentials: boolean = false;
 
-  constructor(private api: UserAuthService, private router: Router) {}
+  constructor(
+    private api: UserAuthService,
+    private router: Router
+  ) {}
 
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -58,8 +64,16 @@ export class LoginFormComponent {
     this.router.navigate(["/signup"]);
   }
 
-  handleGoogleAuthButtonClick() {
-    alert("Google OAuth button clicked!");
+  handleGoogleSignin(user: SocialUser) {
+    this.api.signInWithGoogle(user.idToken, user.email, user.name).subscribe({
+      next: (res) => {
+        if (res.error) {
+          this.invalidCredentials = true;
+        } else {
+          this.router.navigate(["/"]);
+        }
+      },
+    });
   }
 
   handleEmailValueChange(value: string) {

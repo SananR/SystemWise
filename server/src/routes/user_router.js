@@ -45,32 +45,6 @@ usersRouter.post('/signup', async (req, res) => {
   });
 
   try {
-    if (
-      !req.body ||
-      !req.body.password ||
-      !req.body.email ||
-      !req.body.username
-    ) {
-      res.status(400).json({ error: 'All fields are required' });
-      return;
-    }
-    const existingUserEmail = await User.findOne({ email: req.body.email });
-    const existingUserName = await User.findOne({
-      username: req.body.username,
-    });
-
-    if (existingUserName || existingUserEmail) {
-      return res.status(422).json({ error: 'User already exists' });
-    }
-
-    const saltRounds = 10;
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const user = new User({
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, salt),
-      username: req.body.username,
-    });
-
     const jsonResponse = await user.save();
     req.session.userId = jsonResponse.username;
     const response = {
@@ -88,23 +62,19 @@ usersRouter.post('/signup', async (req, res) => {
 
 usersRouter.post('/login', async (req, res) => {
   try {
-    if (!req.body.password) {
-      res.status(400).json({ error: 'Password Required' });
-      return;
-    }
-    if (!req.body.email) {
-      res.status(400).json({ error: 'Email Required' });
-      return;
+    if (!req.body || !req.body.password || !req.body.email) {
+      return res.status(400).json({ error: 'Bad Request' });
     }
     const user = await User.findOne({ email: req.body.email });
-    if (user === null) {
-      res.status(404).json({ error: 'User not found' });
-      return;
+    if (!user) {
+      return res.status(404).json({ error: 'Invalid credentials' });
     }
-    const password = bcrypt.compareSync(req.body.password, user.password);
+    if (user.auth.type === 'oauth') {
+      return res.status(404).json({ error: 'Invalid credentials' });
+    }
+    const password = bcrypt.compareSync(req.body.password, user.auth.password);
     if (!password) {
-      res.status(400).json({ error: 'Password Incorrect' });
-      return;
+      return res.status(400).json({ error: 'Invalid credentials' });
     }
     req.session.userId = user.username;
     return res.status(200).json({ username: user.username, email: user.email });
@@ -171,4 +141,28 @@ usersRouter.post('/signup/google', async (req, res) => {
   }
 
   return res.status(422).json({ error: 'Unprocessable entity' });
+});
+
+usersRouter.post('/login/google', async (req, res) => {
+  if (!req.body || !req.body.idToken || !req.body.email || !req.body.name) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+  const idToken = req.body.idToken;
+
+  const ticket = await client.verifyIdToken({
+    idToken: idToken,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
+
+  const payload = ticket.getPayload();
+
+  const user = await User.findOne({ email: payload.email });
+
+  if (!user) {
+    return res.status(404).json({ error: 'Invalid credentials.' });
+  }
+
+  return res
+    .status(200)
+    .json({ username: user.username, email: payload.email });
 });

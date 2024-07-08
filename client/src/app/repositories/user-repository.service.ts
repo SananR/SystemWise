@@ -1,17 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "../services/api.service";
-
-interface SignupResponse {
-  success: boolean;
-  error?: string;
-  username?: string;
-}
-
-interface MeResponse {
-  success: boolean;
-  error: string;
-  username?: string;
-}
 import APIResponse from "../util/api-response";
 
 @Injectable({
@@ -40,7 +28,15 @@ export class UserRepositoryService {
   }
 
   signUpWithGoogle(idToken: string, email: string, name: string) {
-    return this.api.post<SignupResponse>(`/api/users/signup/google`, {
+    return this.api.post<APIResponse>(`/api/users/signup/google`, {
+      idToken: idToken,
+      email: email,
+      name: name,
+    });
+  }
+
+  signInWithGoogle(idToken: string, email: string, name: string) {
+    return this.api.post<APIResponse>(`/api/users/login/google`, {
       idToken: idToken,
       email: email,
       name: name,

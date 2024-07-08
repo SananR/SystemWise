@@ -59,10 +59,25 @@ export class UserAuthService {
     );
   }
 
+  signInWithGoogle(idToken: string, email: string, name: string) {
+    return this.user.signInWithGoogle(idToken, email, name).pipe(
+      catchError((e) => {
+        return of({ success: false, error: e.error });
+      }),
+      tap((res) => {
+        if (!res.error) {
+          this.isLoggedIn.next(true);
+        }
+      })
+    );
+  }
+
   signOut() {
-    catchError((e) => {
-      this.isLoggedIn.next(false);
-      return of({ success: false, error: e.error });
-    });
+    return this.user.signOut().pipe(
+      catchError((e) => {
+        this.isLoggedIn.next(false);
+        return of({ success: false, error: e.error });
+      })
+    );
   }
 }
