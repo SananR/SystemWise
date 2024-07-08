@@ -40,6 +40,7 @@ yarn-error.log
 testem.log
 /typings
 eslint.config.mjs
+*.rdb
 
 # System files
 **/.DS_Store

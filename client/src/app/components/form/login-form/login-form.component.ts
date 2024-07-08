@@ -4,6 +4,10 @@ import { FormBtnComponent } from "../form-btn/form-btn.component";
 import { MatDividerModule } from "@angular/material/divider";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { UserAuthService } from "../../../services/user-auth.service";
+import { Router } from "@angular/router";
+import { GoogleAuthBtnComponent } from "../google-auth-btn/google-auth-btn.component";
+import { SocialUser } from "@abacritt/angularx-social-login";
 
 @Component({
   selector: "app-login-form",
@@ -14,6 +18,7 @@ import { CommonModule } from "@angular/common";
     MatDividerModule,
     CommonModule,
     FormsModule,
+    GoogleAuthBtnComponent,
   ],
   templateUrl: "./login-form.component.html",
   styleUrls: ["./login-form.component.scss"],
@@ -21,6 +26,12 @@ import { CommonModule } from "@angular/common";
 export class LoginFormComponent {
   emailValue: string = "";
   passwordValue: string = "";
+  invalidCredentials: boolean = false;
+
+  constructor(
+    private api: UserAuthService,
+    private router: Router
+  ) {}
 
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -38,11 +49,31 @@ export class LoginFormComponent {
   }
 
   handleSignInButtonClick() {
-    alert("Login form submitted!");
+    this.api.signIn(this.emailValue, this.passwordValue).subscribe({
+      next: (res) => {
+        if (res.error) {
+          this.invalidCredentials = true;
+        } else {
+          this.router.navigate([`/`]);
+        }
+      },
+    });
   }
 
-  handleGoogleAuthButtonClick() {
-    alert("Google OAuth button clicked!");
+  handleSignUpButtonClick() {
+    this.router.navigate(["/signup"]);
+  }
+
+  handleGoogleSignin(user: SocialUser) {
+    this.api.signInWithGoogle(user.idToken, user.email, user.name).subscribe({
+      next: (res) => {
+        if (res.error) {
+          this.invalidCredentials = true;
+        } else {
+          this.router.navigate(["/"]);
+        }
+      },
+    });
   }
 
   handleEmailValueChange(value: string) {

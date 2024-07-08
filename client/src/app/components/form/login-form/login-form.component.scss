@@ -1,4 +1,11 @@
 @import "../../../../sass/_variables.scss";
 .login-form {
     background-color: $background-dark-lighter-color;
+    width: 446px;
   }
+
+// bandaid fix for sign up with google button jitter - error on google's end
+// source: https://stackoverflow.com/questions/69242615/prevent-sign-in-with-google-button-flickering-while-loading-when-centered-vertic
+.google-btn-container {
+  height: 44px;
+}
