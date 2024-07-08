@@ -9,7 +9,7 @@ interface SignupResponse {
 
 interface MeResponse {
   success: boolean;
-  error?: string;
+  error: string;
   username?: string;
 }
 
@@ -44,5 +44,9 @@ export class UserRepositoryService {
       email: email,
       name: name,
     });
+  }
+
+  signOut() {
+    return this.api.get(`/api/users/signout`);
   }
 }

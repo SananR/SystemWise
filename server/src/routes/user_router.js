@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import { OAuth2Client } from 'google-auth-library';
 import 'dotenv/config';
 import crypto from 'crypto';
+import { isAuthenticated } from '../../middleware/auth.js';
 
 export const usersRouter = Router();
 
@@ -79,16 +80,14 @@ usersRouter.post('/login', async (req, res) => {
   return res.status(200).json({ username: user.username, email: user.email });
 });
 
-usersRouter.get('/me', async (req, res) => {
-  if (!req.session.userId) {
-    return res.status(400).json({ error: 'Bad request' });
-  }
+usersRouter.get('/me', isAuthenticated, async (req, res) => {
   const user = await User.findOne({ username: req.session.userId });
-  if (!user) {
-    return res.status(400).json({ error: 'Bad request' });
-  }
-  const response = { username: user.username };
-  return res.json(response);
+  return res.status(200).json({ username: user.username });
+});
+
+usersRouter.get('/signout', isAuthenticated, function (req, res) {
+  req.session.destroy();
+  return res.redirect('/');
 });
 
 usersRouter.post('/signup/google', async (req, res) => {
