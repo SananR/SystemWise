@@ -26,7 +26,10 @@ export class LandingPageComponent {
   authenticated: boolean = false;
   private authStatusSub: Subscription | null = null;
 
-  constructor(private router: Router, private authApi: UserAuthService) {}
+  constructor(
+    private router: Router,
+    private authApi: UserAuthService
+  ) {}
 
   ngOnInit() {
     this.authStatusSub = this.authApi.isLoggedIn.subscribe((status) => {
