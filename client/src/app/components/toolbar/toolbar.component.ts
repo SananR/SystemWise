@@ -21,16 +21,12 @@ export class ToolbarComponent {
 
   constructor(
     private router: Router,
-    protected authApi: UserAuthService,
+    protected authApi: UserAuthService
   ) {}
 
   ngOnInit() {
-    this.authApi.me().subscribe((res) => {
-      if (!res.error) {
-        this.authenticated = true;
-      } else {
-        this.authenticated = false;
-      }
+    this.authStatusSub = this.authApi.isLoggedIn.subscribe((status) => {
+      this.authenticated = status;
     });
   }
 
@@ -63,9 +59,11 @@ export class ToolbarComponent {
   handleSignOut() {
     this.authApi.signOut().subscribe((_) => {
       this.authApi.isLoggedIn.next(false);
-      this.router.navigateByUrl('/logout', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/']); // Navigate back to landing
-      });
+      this.router
+        .navigateByUrl("/logout", { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate(["/"]); // Navigate back to landing
+        });
     });
   }
 }

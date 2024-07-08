@@ -4,6 +4,8 @@ import { FormBtnComponent } from "../form-btn/form-btn.component";
 import { MatDividerModule } from "@angular/material/divider";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { UserAuthService } from "../../../services/user-auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login-form",
@@ -21,6 +23,9 @@ import { CommonModule } from "@angular/common";
 export class LoginFormComponent {
   emailValue: string = "";
   passwordValue: string = "";
+  invalidCredentials: boolean = false;
+
+  constructor(private api: UserAuthService, private router: Router) {}
 
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -38,7 +43,19 @@ export class LoginFormComponent {
   }
 
   handleSignInButtonClick() {
-    alert("Login form submitted!");
+    this.api.signIn(this.emailValue, this.passwordValue).subscribe({
+      next: (res) => {
+        if (res.error) {
+          this.invalidCredentials = true;
+        } else {
+          this.router.navigate([`/`]);
+        }
+      },
+    });
+  }
+
+  handleSignUpButtonClick() {
+    this.router.navigate(["/signup"]);
   }
 
   handleGoogleAuthButtonClick() {
