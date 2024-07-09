@@ -1,0 +1,21 @@
+{
+  "name": "grader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:grader": "node app.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "eslint": "^9.6.0",
+    "prettier": "^3.3.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1",
+    "redis": "^4.6.15"
+  }
+}
