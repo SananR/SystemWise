@@ -1,10 +1,12 @@
 import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
 import { provideRouter } from "@angular/router";
 import {
+  QuickToolbarService,
   ToolbarService,
   LinkService,
   ImageService,
   HtmlEditorService,
+  TableService,
 } from "@syncfusion/ej2-angular-richtexteditor";
 
 import { routes } from "./app.routes";
@@ -23,5 +25,7 @@ export const appConfig: ApplicationConfig = {
     LinkService,
     ImageService,
     HtmlEditorService,
+    QuickToolbarService,
+    TableService,
   ],
 };

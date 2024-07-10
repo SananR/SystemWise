@@ -1,5 +1,16 @@
 @import "../../../sass/_variables.scss";
 
+.e-rte-quick-popup,
+.e-rte-quick-popup .e-rte-quick-toolbar .e-toolbar-items {
+  background: $background-dark-lighter-color;
+}
+.e-rte-quick-popup .e-rte-quick-toolbar .e-toolbar-item .e-icons {
+  color: $background-light-color;
+}
+.e-rte-quick-popup .e-rte-quick-toolbar .e-toolbar-item:hover .e-icons {
+  color: $primary-color;
+}
+
 .e-toolbar-wrapper {
   border: none;
 }
@@ -73,4 +84,14 @@
 
 .e-richtexteditor .e-rte-toolbar .e-toolbar-extended {
   background: $background-dark-lighter-color;
+}
+
+/* To change font color, font family, font size and opacity  */
+.e-richtexteditor .e-rte-character-count {
+  color: red;
+  font-family: segoe ui;
+  font-size: 18px;
+  opacity: 00.54;
+  padding-bottom: 2px;
+  padding-right: 14px;
 }
