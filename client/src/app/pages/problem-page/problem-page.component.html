@@ -1,4 +1,11 @@
-<app-toolbar></app-toolbar>
-<div class="d-flex justify-content-center align-items-center h-100">
-  <app-text-editor class="w-100 h-50"></app-text-editor>
+<div class="d-flex justify-content-center align-items-start flex-column h-100">
+  <app-toolbar class="h-24"></app-toolbar>
+  <div class="w-100 h-100 d-flex justify-content-center align-items-center gap-2">
+    <div class="problem-container ml-2 w-50 h-100 overflow-hidden rounded-md d-flex justify-content-start align-items-start">
+        <div class="problem-container-header w-100 h-11"></div>
+    </div>
+    <div class="submission-container mr-2 w-50 h-100 overflow-hidden	rounded-md border-gray-400 border-1 border-opacity-50">
+      <app-text-editor class="w-100 h-50"></app-text-editor>
+    </div>
+  </div>
 </div>

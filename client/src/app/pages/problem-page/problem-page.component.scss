@@ -1,0 +1,10 @@
+@import "../../../sass/_variables.scss";
+
+.problem-container {
+    background: $background-dark-lighter-color;
+    resize: both;
+    overflow: hidden;
+}
+.problem-container-header {
+    background: rgb(55, 55, 55)
+}

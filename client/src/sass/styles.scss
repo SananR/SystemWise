@@ -3,6 +3,9 @@
 @import "@fortawesome/fontawesome-free/css/all.css";
 @import "./_variables.scss";
 @import "./_mixins.scss";
+@import "../../node_modules/tailwindcss/base.css";
+@import "../../node_modules/tailwindcss/utilities.css";
+@import "../../node_modules/tailwindcss/components.css";
 @import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-icons/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
