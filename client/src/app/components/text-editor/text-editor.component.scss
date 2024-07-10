@@ -1,0 +1,76 @@
+@import "../../../sass/_variables.scss";
+
+.e-toolbar-wrapper {
+  border: none;
+}
+.e-rte-container {
+  border: 1px solid $background-dark-lighter-color;
+}
+
+/* To change font family and font size */
+.e-richtexteditor .e-rte-content .e-content,
+.e-richtexteditor .e-source-content .e-content {
+  font-size: 20px;
+  font-family: Roboto;
+  border-color: gainsboro;
+}
+.e-toolbar .e-hor-nav {
+  background: $primary-color;
+  transition: 0.2s all;
+}
+.e-toolbar .e-hor-nav:hover {
+  background: $secondary-color;
+  transition: 0.2s all;
+}
+/* To change font color and content background */
+.e-richtexteditor .e-rte-content,
+.e-richtexteditor .e-source-content {
+  background: $background-dark-color;
+  color: gainsboro;
+}
+.e-toolbar.e-extended-toolbar .e-toolbar-extended .e-toolbar-item.e-overlay,
+.e-toolbar .e-toolbar-item.e-overlay {
+  background: $background-dark-lighter-color;
+}
+.e-rte-toolbar,
+.e-toolbar,
+.e-toolbar-items {
+  background: $background-dark-lighter-color;
+  transition: 0.2s all;
+}
+
+/* To change font color for toolbar icon */
+.e-richtexteditor .e-rte-toolbar .e-toolbar-item:hover .e-icons {
+  color: $primary-color;
+  transition: 0.2s all;
+}
+.e-richtexteditor .e-rte-toolbar .e-toolbar-item .e-icons {
+  color: $background-light-color;
+}
+
+/* To change font color for toolbar button */
+.e-toolbar .e-tbar-btn,
+.e-toolbar .e-tbar-btn:hover,
+.e-toolbar .e-tbar-btn:active {
+  color: $background-light-color;
+  background: $background-dark-lighter-color;
+}
+
+.e-richtexteditor .e-rte-toolbar .e-toolbar-item.e-active .e-tbar-btn .e-icons {
+  color: $primary-color;
+}
+
+/* To change font color for expanded toolbar items */
+.e-richtexteditor
+  .e-rte-toolbar
+  .e-toolbar-extended
+  .e-toolbar-item
+  .e-tbar-btn
+  .e-icons,
+.e-toolbar.e-extended-toolbar .e-toolbar-extended .e-toolbar-item .e-tbar-btn {
+  background: $background-dark-lighter-color;
+}
+
+.e-richtexteditor .e-rte-toolbar .e-toolbar-extended {
+  background: $background-dark-lighter-color;
+}
