@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectorRef, Component, Input } from "@angular/core";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { ViewChild, TemplateRef } from "@angular/core";
 
@@ -15,4 +15,10 @@ export class TabbedContainerItemComponent {
   @Input() tabName? = "default";
   @Input() tabIcon = faBook;
   @Input() iconColor = "green";
+
+  constructor(private cdRef: ChangeDetectorRef) {}
+
+  ngAfterContentInit() {
+    this.cdRef.reattach();
+  }
 }
