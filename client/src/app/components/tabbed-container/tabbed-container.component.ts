@@ -1,8 +1,8 @@
 import {
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   QueryList,
-  ChangeDetectorRef,
 } from "@angular/core";
 import { TabbedContainerItemComponent } from "./tabbed-container-item/tabbed-container-item.component";
 import { CommonModule, NgFor, NgClass } from "@angular/common";
@@ -23,10 +23,9 @@ import { faBook } from "@fortawesome/free-solid-svg-icons/faBook";
   styleUrl: "./tabbed-container.component.scss",
 })
 export class TabbedContainerComponent {
-  constructor(private cdRef: ChangeDetectorRef) {}
-
   faBook = faBook;
-  initialized: boolean = false;
+
+  constructor(private readonly cdr: ChangeDetectorRef) {}
 
   @ContentChildren(TabbedContainerItemComponent)
   tabs!: QueryList<TabbedContainerItemComponent>;
@@ -34,15 +33,20 @@ export class TabbedContainerComponent {
   activeTab!: TabbedContainerItemComponent;
 
   ngAfterContentInit() {
-    this.cdRef.detach();
+    this.cdr.detach();
     this.updateActiveTab();
   }
 
   ngAfterContentChecked() {
-    this.cdRef.detectChanges();
+    this.cdr.detectChanges();
   }
 
   updateActiveTab() {
     this.activeTab = this.tabs.first;
+  }
+
+  activateTab(tab: TabbedContainerItemComponent) {
+    this.activeTab = tab;
+    this.cdr.detectChanges();
   }
 }

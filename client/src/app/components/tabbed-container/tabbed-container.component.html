@@ -7,6 +7,7 @@
     <div
       class="tab-header-item cursor-pointer d-flex justify-content-start align-items-center rounded-md gap-2 pl-2 pr-2"
       *ngFor="let tab of tabs"
+      (click)="activateTab(tab)"
     >
       <fa-icon
         [icon]="tab.tabIcon"
