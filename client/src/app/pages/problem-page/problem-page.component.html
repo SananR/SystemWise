@@ -1,11 +1,38 @@
 <div class="d-flex justify-content-center align-items-start flex-column h-100">
   <app-toolbar class="h-24"></app-toolbar>
-  <div class="w-100 h-100 d-flex justify-content-center align-items-center gap-2">
-    <div class="problem-container ml-2 w-50 h-100 overflow-hidden rounded-md d-flex justify-content-start align-items-start">
-        <div class="problem-container-header w-100 h-11"></div>
-    </div>
-    <div class="submission-container mr-2 w-50 h-100 overflow-hidden	rounded-md border-gray-400 border-1 border-opacity-50">
-      <app-text-editor class="w-100 h-50"></app-text-editor>
-    </div>
+  <div
+    class="w-100 h-100 d-flex justify-content-center align-items-center gap-2"
+  >
+    <app-tabbed-container class="ml-2 w-50 h-100">
+      <app-tabbed-container-item tabName="Problem Description">
+      </app-tabbed-container-item>
+      <app-tabbed-container-item
+        tabName="Submissions"
+        [tabIcon]="faClockRotateLeft"
+        iconColor="aqua"
+      >
+      </app-tabbed-container-item>
+    </app-tabbed-container>
+
+    <app-tabbed-container
+      class="mr-2 w-50 h-100 border-gray-400 border-1 border-opacity-50 rounded-md"
+    >
+      <app-tabbed-container-item
+        tabName="Text Editor"
+        [tabIcon]="faPenToSquare"
+        iconColor="gold"
+        class="w-100 h-100"
+      >
+        <app-text-editor class="w-100 h-100"></app-text-editor>
+      </app-tabbed-container-item>
+      <app-tabbed-container-item
+        tabName="Diagramming"
+        [tabIcon]="faDiagramProject"
+        iconColor="pink"
+        class="w-100 h-100"
+      >
+        <app-text-editor class="w-100 h-100"></app-text-editor>
+      </app-tabbed-container-item>
+    </app-tabbed-container>
   </div>
 </div>
