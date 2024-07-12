@@ -9,6 +9,7 @@ import { Subscription } from "rxjs";
 import { faPaperPlane, faComments } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-problem-toolbar",
@@ -19,6 +20,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatToolbarModule,
     LogoComponent,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   templateUrl: "./problem-toolbar.component.html",
   styleUrl: "./problem-toolbar.component.scss",
@@ -27,13 +29,14 @@ export class ProblemToolbarComponent {
   private authStatusSub: Subscription | null = null;
   authenticated: boolean | undefined;
   attached: Boolean = true;
-  submitPending: Boolean = true;
+  submitPending: Boolean = false;
   faPaperPlane = faPaperPlane;
   faComments = faComments;
 
   constructor(
     private router: Router,
-    protected authApi: UserAuthService
+    protected authApi: UserAuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -77,5 +80,19 @@ export class ProblemToolbarComponent {
           this.router.navigate(["/"]); // Navigate back to landing
         });
     });
+  }
+
+  handleSubmit() {
+    this.submitPending = true;
+    this.snackBar.open(
+      "Your submission is being graded! Awaiting your results...",
+      "Close",
+      {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "center",
+        panelClass: ["position-fixed", "top-0", "z-10", "right-0"],
+      }
+    );
   }
 }
