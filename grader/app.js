@@ -1,10 +1,5 @@
 import { Job, Worker } from "bullmq";
-import "dotenv/config";
-import { ChatOpenAI } from "@langchain/openai";
-
-const chatModel = new ChatOpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+import { executeQuery } from "./grader.js";
 
 async function gradeSubmission(submission) {
   console.log("grading submission!");
@@ -20,4 +15,4 @@ async function gradeSubmission(submission) {
 //   gradeSubmission(null);
 // });
 
-gradeSubmission("geelo");
+executeQuery();

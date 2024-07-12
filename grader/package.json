@@ -15,6 +15,7 @@
     "prettier": "^3.3.2"
   },
   "dependencies": {
+    "@langchain/community": "^0.2.18",
     "@langchain/openai": "^0.2.1",
     "bullmq": "^5.8.7",
     "dotenv": "^16.4.5",
