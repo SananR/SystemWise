@@ -2,6 +2,7 @@
 
 .toolbar-container {
   transition: all 0.5s;
+  min-width: 900px;
 }
 .toolbar-attach {
   position: absolute !important;
@@ -21,6 +22,7 @@
 .submit-button {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+  min-width: 120px;
 }
 .feedback-button {
   border-top-left-radius: 0 !important;

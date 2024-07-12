@@ -1,15 +1,16 @@
 import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import indexRouter from './routes/index.js';
-import { usersRouter } from './routes/user_router.js';
+import indexRouter from './routes/index.ts';
+import { usersRouter } from './routes/user_router.ts';
+import { submissionsRouter } from './routes/submissions_router.ts';
 import logger from 'morgan';
 import 'dotenv/config';
-import connectMongoDB from '../middleware/mongoConnector.js';
+import connectMongoDB from './middleware/mongoConnector.ts';
 import cors from 'cors';
 import session from 'express-session';
 import RedisStore from 'connect-redis';
-import { connectRedis } from '../middleware/redisConnector.js';
+import { connectRedis } from './middleware/redisConnector.ts';
 
 const PORT = 3000;
 const app = express();
@@ -55,6 +56,7 @@ app.use(
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/submissions', submissionsRouter);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);

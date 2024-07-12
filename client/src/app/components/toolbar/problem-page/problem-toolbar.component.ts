@@ -8,11 +8,18 @@ import { UserAuthService } from "../../../services/user-auth.service";
 import { Subscription } from "rxjs";
 import { faPaperPlane, faComments } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-problem-toolbar",
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, MatToolbarModule, LogoComponent],
+  imports: [
+    FontAwesomeModule,
+    CommonModule,
+    MatToolbarModule,
+    LogoComponent,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: "./problem-toolbar.component.html",
   styleUrl: "./problem-toolbar.component.scss",
 })
@@ -20,6 +27,7 @@ export class ProblemToolbarComponent {
   private authStatusSub: Subscription | null = null;
   authenticated: boolean | undefined;
   attached: Boolean = true;
+  submitPending: Boolean = true;
   faPaperPlane = faPaperPlane;
   faComments = faComments;
 

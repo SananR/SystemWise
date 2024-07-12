@@ -13,8 +13,15 @@
       <button
         class="page-button submit-button btn btn-dark btn-md d-flex justify-content-center align-items-center text-primary gap-2"
       >
-        Submit
-        <fa-icon [icon]="faPaperPlane" size="1x" class="text-primary"></fa-icon>
+        <span *ngIf="!submitPending">Submit</span>
+        <span *ngIf="submitPending">Pending</span>
+        <fa-icon
+          *ngIf="!submitPending"
+          [icon]="faPaperPlane"
+          size="1x"
+          class="text-primary"
+        ></fa-icon>
+        <mat-spinner *ngIf="submitPending" diameter="24"></mat-spinner>
       </button>
       <button
         class="page-button feedback-button btn btn-dark btn-md d-flex justify-content-center align-items-center text-light gap-2"

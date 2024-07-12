@@ -50,7 +50,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/custom-theme.scss", "src/sass/styles.scss"],
+            "styles": ["src/sass/m3-theme.scss", "src/sass/styles.scss"],
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,

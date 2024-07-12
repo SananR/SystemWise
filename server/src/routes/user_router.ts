@@ -1,10 +1,10 @@
-import { User } from '../models/user.js';
+import { User } from '../models/user.ts';
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import { OAuth2Client } from 'google-auth-library';
 import 'dotenv/config';
 import crypto from 'crypto';
-import { isAuthenticated } from '../../middleware/auth.js';
+import { isAuthenticated } from '../middleware/auth.ts';
 
 export const usersRouter = Router();
 
@@ -52,7 +52,7 @@ usersRouter.post('/signup', async (req, res) => {
       username: jsonResponse.username,
       email: jsonResponse.email,
     };
-    return res.json(response);
+    return res.status(201).json(response);
   } catch (error) {
     console.error('Signup error:', error);
     return res
