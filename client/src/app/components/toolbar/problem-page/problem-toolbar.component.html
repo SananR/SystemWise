@@ -7,21 +7,22 @@
     class="d-flex gap-2 bg-transparent justify-content-center align-items-center"
   >
     <app-logo class="h-100"></app-logo>
-    <button
-      class="page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white"
+    <div
+      class="d-flex justify-content-center align-items-center position-absolute"
     >
-      Explore Problems
-    </button>
-    <button
-      class="page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white"
-    >
-      Guides
-    </button>
-    <button
-      class="page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white"
-    >
-      Leaderboards
-    </button>
+      <button
+        class="page-button submit-button btn btn-dark btn-md d-flex justify-content-center align-items-center text-primary gap-2"
+      >
+        Submit
+        <fa-icon [icon]="faPaperPlane" size="1x" class="text-primary"></fa-icon>
+      </button>
+      <button
+        class="page-button feedback-button btn btn-dark btn-md d-flex justify-content-center align-items-center text-light gap-2"
+      >
+        Get Feedback
+        <fa-icon [icon]="faComments" size="1x" class="text-primary"></fa-icon>
+      </button>
+    </div>
 
     <button
       class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"

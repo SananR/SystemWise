@@ -8,7 +8,8 @@ import { isAuthenticated } from '../../middleware/auth.js';
 
 export const usersRouter = Router();
 
-const client = new OAuth2Client();
+const oauthClient = new OAuth2Client();
+
 usersRouter.post('/signup', async (req, res) => {
   if (
     !req.body ||
@@ -107,7 +108,7 @@ usersRouter.post('/signup/google', async (req, res) => {
     return res.status(422).json({ error: 'Unprocessable entity' });
   }
 
-  const ticket = await client.verifyIdToken({
+  const ticket = await oauthClient.verifyIdToken({
     idToken: idToken,
     audience: process.env.GOOGLE_CLIENT_ID,
   });
@@ -149,7 +150,7 @@ usersRouter.post('/login/google', async (req, res) => {
   }
   const idToken = req.body.idToken;
 
-  const ticket = await client.verifyIdToken({
+  const ticket = await oauthClient.verifyIdToken({
     idToken: idToken,
     audience: process.env.GOOGLE_CLIENT_ID,
   });
