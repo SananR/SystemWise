@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:grader": "node app.ts"
+    "start:grader": "npx tsx app.ts"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +12,9 @@
   "devDependencies": {
     "@eslint/js": "^9.6.0",
     "eslint": "^9.6.0",
-    "prettier": "^3.3.2"
+    "prettier": "^3.3.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
   },
   "dependencies": {
     "@langchain/community": "^0.2.18",

@@ -1,14 +1,15 @@
-import { User } from '../models/user.js';
+import { User } from '../models/user.ts';
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import { OAuth2Client } from 'google-auth-library';
 import 'dotenv/config';
 import crypto from 'crypto';
-import { isAuthenticated } from '../../middleware/auth.js';
+import { isAuthenticated } from '../middleware/auth.ts';
 
 export const usersRouter = Router();
 
-const client = new OAuth2Client();
+const oauthClient = new OAuth2Client();
+
 usersRouter.post('/signup', async (req, res) => {
   if (
     !req.body ||
@@ -51,7 +52,7 @@ usersRouter.post('/signup', async (req, res) => {
       username: jsonResponse.username,
       email: jsonResponse.email,
     };
-    return res.json(response);
+    return res.status(201).json(response);
   } catch (error) {
     console.error('Signup error:', error);
     return res
@@ -107,7 +108,7 @@ usersRouter.post('/signup/google', async (req, res) => {
     return res.status(422).json({ error: 'Unprocessable entity' });
   }
 
-  const ticket = await client.verifyIdToken({
+  const ticket = await oauthClient.verifyIdToken({
     idToken: idToken,
     audience: process.env.GOOGLE_CLIENT_ID,
   });
@@ -149,7 +150,7 @@ usersRouter.post('/login/google', async (req, res) => {
   }
   const idToken = req.body.idToken;
 
-  const ticket = await client.verifyIdToken({
+  const ticket = await oauthClient.verifyIdToken({
     idToken: idToken,
     audience: process.env.GOOGLE_CLIENT_ID,
   });

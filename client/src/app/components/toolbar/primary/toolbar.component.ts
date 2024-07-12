@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { LogoComponent } from "../logo/logo.component";
-import { ActivatedRoute, Router } from "@angular/router";
+import { LogoComponent } from "../../logo/logo.component";
+import { Router } from "@angular/router";
 import { HostListener } from "@angular/core";
-import { UserAuthService } from "../../services/user-auth.service";
+import { UserAuthService } from "../../../services/user-auth.service";
 import { Subscription } from "rxjs";
 
 @Component({

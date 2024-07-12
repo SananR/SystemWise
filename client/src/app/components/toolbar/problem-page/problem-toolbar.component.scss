@@ -1,0 +1,30 @@
+@import "../../../../sass/_variables.scss";
+
+.toolbar-container {
+  transition: all 0.5s;
+  min-width: 900px;
+}
+.toolbar-attach {
+  position: absolute !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+.page-button {
+  font-weight: 700;
+  color: $primary-color;
+  background-color: $background-dark-lighter-color !important;
+}
+.page-button:hover {
+  background-color: $background-dark-lighter-color;
+}
+.page-button:active {
+  background-color: $background-dark-lighter-color !important;
+}
+.submit-button {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  min-width: 120px;
+}
+.feedback-button {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}

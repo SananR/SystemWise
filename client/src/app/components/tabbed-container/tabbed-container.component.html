@@ -1,0 +1,28 @@
+<div
+  class="tabbed-container overflow-hidden rounded-md d-flex justify-content-start align-items-start flex-column w-100 h-100"
+>
+  <div
+    class="tabbed-container-header w-100 h-8 min-h-8 d-flex justify-content-start align-items-center pl-2"
+  >
+    <div
+      class="tab-header-item cursor-pointer d-flex justify-content-start align-items-center rounded-md gap-2 pl-2 pr-2"
+      *ngFor="let tab of tabs"
+      (click)="activateTab(tab)"
+    >
+      <fa-icon
+        [icon]="tab.tabIcon"
+        size="1x"
+        [style]="{ color: tab.iconColor }"
+      ></fa-icon>
+      <span
+        class="tab-header-text"
+        [ngClass]="{
+          'text-white': tab == activeTab,
+          'font-semibold': tab == activeTab,
+        }"
+        >{{ tab.tabName }}</span
+      >
+    </div>
+  </div>
+  <ng-container [ngTemplateOutlet]="activeTab.template"></ng-container>
+</div>

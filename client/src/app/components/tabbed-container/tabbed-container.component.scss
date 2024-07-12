@@ -1,0 +1,18 @@
+@import "../../../sass/_variables.scss";
+
+.tabbed-container {
+  background: $background-dark-lighter-color;
+}
+.tabbed-container-header {
+  background: rgb(55, 55, 55);
+}
+.tab-header-item:hover {
+  background-color: rgb(68, 68, 68);
+}
+.tab-header-text {
+  color: $background-light-color;
+}
+
+.tab-header-item:hover .tab-header-text {
+  color: whitesmoke;
+}
