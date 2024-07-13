@@ -176,6 +176,7 @@ usersRouter.post('/login/google', async (req, res) => {
   if (!user) {
     return res.status(404).json({ error: 'Invalid credentials.' });
   }
+  req.session.userId = user.username;
 
   return res
     .status(200)
