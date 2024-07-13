@@ -25,8 +25,12 @@ export class ToolbarComponent {
   ) {}
 
   ngOnInit() {
-    this.authStatusSub = this.authApi.isLoggedIn.subscribe((status) => {
-      this.authenticated = status;
+    this.authApi.me().subscribe((res) => {
+      if (res.error) {
+        this.authenticated = false;
+      } else {
+        this.authenticated = true;
+      }
     });
   }
 
