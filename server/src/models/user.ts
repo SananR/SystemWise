@@ -1,5 +1,24 @@
 import mongoose from 'mongoose';
 
+const AuthSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: function () {
+      return this.type === 'regular';
+    },
+  },
+  provider: {
+    type: String,
+    required: function () {
+      return this.type === 'oauth';
+    },
+  },
+});
+
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -12,22 +31,8 @@ const UserSchema = new mongoose.Schema({
     unique: true,
   },
   auth: {
-    type: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: function () {
-        return this.auth.type === 'regular';
-      },
-    },
-    provider: {
-      type: String,
-      required: function () {
-        return this.auth.type === 'oauth';
-      },
-    },
+    required: true,
+    type: AuthSchema,
   },
 });
 

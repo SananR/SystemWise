@@ -89,6 +89,9 @@ usersRouter.post('/login', async (req, res) => {
 
 usersRouter.get('/me', isAuthenticated, async (req, res) => {
   const user = await User.findOne({ username: req.session.userId });
+  if (!user) {
+    return res.status(400).json({ error: 'Bad Request' });
+  }
   return res.status(200).json({ username: user.username });
 });
 
@@ -114,10 +117,14 @@ usersRouter.post('/signup/google', async (req, res) => {
   });
 
   const payload = ticket.getPayload();
+  if (!payload) {
+    return res.status(404).json({ error: 'Invalid credentials.' });
+  }
 
   const hash = crypto.createHash('md5').update(payload.sub).digest('hex');
   var k = 5;
-  var username = payload.given_name + payload.family_name + hash.slice(0, k);
+  var username =
+    (payload.given_name || '') + (payload.family_name || '') + hash.slice(0, k);
   var user;
 
   while (k < hash.length) {
@@ -138,7 +145,10 @@ usersRouter.post('/signup/google', async (req, res) => {
         .json({ username: result.username, email: result.email });
     }
     k += 1;
-    username = payload.given_name + payload.family_name + hash.slice(0, k);
+    username =
+      (payload.given_name || '') +
+      (payload.family_name || '') +
+      hash.slice(0, k);
   }
 
   return res.status(422).json({ error: 'Unprocessable entity' });
@@ -156,6 +166,10 @@ usersRouter.post('/login/google', async (req, res) => {
   });
 
   const payload = ticket.getPayload();
+
+  if (!payload) {
+    return res.status(404).json({ error: 'Invalid credentials.' });
+  }
 
   const user = await User.findOne({ email: payload.email });
 
