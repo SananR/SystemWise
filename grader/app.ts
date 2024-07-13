@@ -2,6 +2,7 @@ import { Job, Worker } from "bullmq";
 import "dotenv/config";
 import { ChatOpenAI } from "@langchain/openai";
 import { Redis } from "ioredis";
+import { gradeSubmission } from "./grader.ts";
 
 let redisClient: Redis;
 /*
@@ -25,24 +26,16 @@ try {
   process.exit(1);
 }
 
-// const chatModel = new ChatOpenAI({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
-
-async function gradeSubmission(submission) {
-  console.log("grading submission!");
-  //const res = await chatModel.invoke("What is LangChain?");
-  //console.log(res);
-}
-
-// const jobsHandlers = {
-//   SubmissionGrader: gradeSubmission,
-// };
+const jobsHandlers = {
+  SubmissionGrader: gradeSubmission,
+};
 
 const gradingWorker = new Worker(
   "SubmissionQueue",
   async (job) => {
     console.log(job);
+    const handler = gradeSubmission;
+    return handler(job.data);
     return "YAY IT WORKS";
   },
   { connection: redisClient }
@@ -52,4 +45,4 @@ gradingWorker.on("ready", function () {
   console.log("Worker is started and ready...");
 });
 
-//gradeSubmission("geelo");
+gradeSubmission("geelo");

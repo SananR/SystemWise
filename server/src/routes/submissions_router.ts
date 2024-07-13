@@ -47,3 +47,5 @@ submissionsRouter.post(
     return res.status(201).json(submission);
   }
 );
+
+submissionsRouter.get('/:id/status', isAuthenticated, async (req, res) => {});
