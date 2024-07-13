@@ -1,0 +1,39 @@
+<div
+  class="main-container d-flex justify-content-center align-items-start flex-column h-100"
+>
+  <app-problem-toolbar class="h-24"></app-problem-toolbar>
+  <div
+    class="w-100 h-100 d-flex justify-content-center align-items-center gap-2"
+  >
+    <app-tabbed-container class="ml-2 w-50 h-100">
+      <app-tabbed-container-item tabName="Problem Description">
+      </app-tabbed-container-item>
+      <app-tabbed-container-item
+        tabName="Submissions"
+        [tabIcon]="faClockRotateLeft"
+        iconColor="aqua"
+      >
+      </app-tabbed-container-item>
+    </app-tabbed-container>
+
+    <app-tabbed-container
+      class="mr-2 w-50 h-100 border-gray-400 border-1 border-opacity-50 rounded-md"
+    >
+      <app-tabbed-container-item
+        tabName="Text Editor"
+        [tabIcon]="faPenToSquare"
+        iconColor="gold"
+        class="w-100 h-100"
+      >
+        <app-text-editor class="w-100 h-100"></app-text-editor>
+      </app-tabbed-container-item>
+      <app-tabbed-container-item
+        tabName="Diagramming"
+        [tabIcon]="faDiagramProject"
+        iconColor="pink"
+        class="w-100 h-100"
+      >
+      </app-tabbed-container-item>
+    </app-tabbed-container>
+  </div>
+</div>

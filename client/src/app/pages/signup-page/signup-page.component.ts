@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { SignupFormComponent } from "../../components/form/signup-form/signup-form.component";
-import { ToolbarComponent } from "../../components/toolbar/toolbar.component";
+import { ToolbarComponent } from "../../components/toolbar/primary/toolbar.component";
 
 @Component({
   selector: "app-signup-page",
