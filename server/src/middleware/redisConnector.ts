@@ -1,9 +1,11 @@
 import { Redis } from 'ioredis';
 import 'dotenv/config';
 
+export let redisClient;
+
 export const connectRedis = async () => {
   try {
-    let redisClient = new Redis(
+    redisClient = new Redis(
       Number(process.env.REDIS_PORT),
       process.env.REDIS_HOST || ''
     )

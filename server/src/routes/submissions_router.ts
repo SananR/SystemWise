@@ -1,18 +1,46 @@
 import { User } from '../models/user.ts';
-import { Submission } from '../models/submission.ts';
+import {
+  Submission,
+  SubmissionJobType,
+  SubmissionStatus,
+} from '../models/submission.ts';
 import { Router } from 'express';
 import 'dotenv/config';
 import { isAuthenticated } from '../middleware/auth.ts';
-import { body, query, Result, validationResult } from 'express-validator';
-import { connectRedis } from '../middleware/redisConnector.ts';
+import { body, query, validationResult } from 'express-validator';
+import { redisClient } from '../middleware/redisConnector.ts';
 import { Queue } from 'bullmq';
 
 export const submissionsRouter = Router();
 
-const redisClient = await connectRedis(); // Connect to Redis
 const submissionQueue = new Queue('SubmissionQueue', {
   connection: redisClient,
 });
+
+submissionsRouter.post(
+  '/check',
+  //isAuthenticated,
+  query('submission_id').notEmpty().isMongoId().escape(),
+  async (req, res) => {
+    const result = validationResult(req).array();
+    if (result.length != 0) {
+      res.status(400).json({ error: 'Bad Request' });
+      return;
+    }
+    const submission = await Submission.findById(req.query.submission_id);
+    if (!submission) {
+      res
+        .status(404)
+        .json({ error: 'Could not find submission with provided id.' });
+      return;
+    }
+    if (
+      SubmissionStatus[submission.status] == SubmissionStatus.AWAITING_GRADING
+    ) {
+      res.status(200).json({ submission_status: submission.status });
+    }
+  }
+);
 
 submissionsRouter.post(
   '/',
@@ -36,16 +64,14 @@ submissionsRouter.post(
 
     // Add the submission to the task queue
     await submissionQueue.add(
-      'submission',
-      { test: 'test', submission },
+      SubmissionJobType.GRADE_SUBMISSION,
+      { submission },
       {
         removeOnComplete: 1000,
         removeOnFail: 5000,
       }
     );
 
-    return res.status(201).json(submission);
+    return res.status(201).json({ submission_id: submission._id });
   }
 );
-
-submissionsRouter.get('/:id/status', isAuthenticated, async (req, res) => {});

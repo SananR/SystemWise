@@ -1,0 +1,4 @@
+export enum SubmissionJobType {
+  GRADE_SUBMISSION = "GRADE_SUBMISSION",
+  UPDATE_SUBMISSION = "UPDATE_SUBMISSION",
+}
