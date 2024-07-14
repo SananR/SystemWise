@@ -8,6 +8,7 @@ import {
   HtmlEditorService,
   TableService,
 } from "@syncfusion/ej2-angular-richtexteditor";
+import { provideMarkdown } from "ngx-markdown";
 
 import { routes } from "./app.routes";
 import { provideClientHydration } from "@angular/platform-browser";
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
+    provideMarkdown(),
     ToolbarService,
     LinkService,
     ImageService,
