@@ -66,11 +66,10 @@ export async function gradeSubmission(input: string) {
     ],
     // ["system", strictness],
     ["placeholder", "{agent_scratchpad}"],
+    ["human", input]
   ]);
 
   const agent = createToolCallingAgent({ llm: chatModel, tools, prompt });
   const agentExecutor = new AgentExecutor({ agent, tools });
-  return await agentExecutor.invoke({
-    input: input,
-  });
+  return await agentExecutor.invoke({});
 }

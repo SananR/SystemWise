@@ -39,6 +39,11 @@ submissionsRouter.post(
     ) {
       res.status(200).json({ submission_status: submission.status });
     }
+    else if (
+      SubmissionStatus[submission.status] == SubmissionStatus.GRADED
+    ) {
+      res.status(200).json({ submission_status: submission.status, score: submission.score });
+    }
   }
 );
 

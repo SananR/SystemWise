@@ -30,6 +30,9 @@ const SubmissionSchema = new mongoose.Schema({
     enum: SubmissionStatus,
     default: SubmissionStatus.AWAITING_GRADING,
   },
+  score: {
+    type: Number
+  }
 });
 
 export const Submission = mongoose.model('Submission', SubmissionSchema);
