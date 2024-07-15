@@ -3,6 +3,9 @@ import {
   SubmissionJobType,
   SubmissionStatus,
 } from '../models/submission.ts';
+import {
+  User
+} from '../models/user.ts';
 import { Router } from 'express';
 import 'dotenv/config';
 import { isAuthenticated } from '../middleware/auth.ts';
@@ -48,7 +51,7 @@ submissionsRouter.post(
 
 submissionsRouter.post(
   '/',
-  //isAuthenticated,
+  isAuthenticated,
   query('problem').notEmpty().escape(),
   body('content').notEmpty().trim(),
   async (req, res) => {
@@ -59,9 +62,9 @@ submissionsRouter.post(
     }
     //TODO VALIDATE PROBLEM
 
-    //const user = await User.findOne({ username: req.session.userId });
+    const user = await User.findOne({ username: req.session.userId });
     const submission = await Submission.create({
-      //user: user,
+      user: user,
       problem: req.query.problem,
       content: req.body.content,
     });

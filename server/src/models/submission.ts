@@ -14,7 +14,7 @@ const SubmissionSchema = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
     ref: 'User',
-    //required: true,
+    required: true,
   },
   problem: {
     type: String,
