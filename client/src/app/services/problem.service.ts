@@ -17,7 +17,6 @@ export class ProblemService {
   }
 
   getTextContent(): string {
-    console.log(this.textEditor);
     if (!this.textEditor.getValue()) return "";
     else return this.textEditor!.getValue()!.value;
   }

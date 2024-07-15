@@ -44,8 +44,12 @@ export class ProblemToolbarComponent {
   ) {}
 
   ngOnInit() {
-    this.authStatusSub = this.authApi.isLoggedIn.subscribe((status) => {
-      this.authenticated = status;
+    this.authApi.me().subscribe((res) => {
+      if (res.error) {
+        this.authenticated = false;
+      } else {
+        this.authenticated = true;
+      }
     });
   }
 
@@ -95,6 +99,17 @@ export class ProblemToolbarComponent {
     const content: string = this.problemService.getTextContent();
     // Sanity checks / validation on content
     if (!content || content.length <= 20) {
+      this.snackBar.open(
+        "Submission not good enough!",
+        "Close",
+        {
+          duration: 3000,
+          verticalPosition: "top",
+          horizontalPosition: "center",
+          panelClass: ["position-fixed", "top-0", "z-10", "right-0"],
+        }
+      );
+      return;
     }
 
     this.submitPending = true;
@@ -111,6 +126,7 @@ export class ProblemToolbarComponent {
     this.submissionService.createSubmission(content);
     this.submissionService.submissionResult.subscribe((res) => {
       console.log(res);
+      this.submitPending = false;
       this.submissionService.submissionResult.complete();
     });
   }
