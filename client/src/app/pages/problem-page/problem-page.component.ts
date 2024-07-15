@@ -9,6 +9,10 @@ import {
   faDiagramProject,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { RecentSubmissionComponent } from "../../components/submission/recent-submission/recent-submission.component";
+import { SubmissionListComponent } from "../../components/submission/submission-list/submission-list.component";
+import { ProblemDescriptionComponent } from "../../components/problem/problem-description/problem-description.component";
+import { FlowchartEditorComponent } from "../../components/diagram-editor/flowchart-editor/flowchart-editor.component";
 
 @Component({
   selector: "app-problem-page",
@@ -18,6 +22,10 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
     ProblemToolbarComponent,
     TabbedContainerComponent,
     TabbedContainerItemComponent,
+    RecentSubmissionComponent,
+    SubmissionListComponent,
+    ProblemDescriptionComponent,
+    FlowchartEditorComponent,
   ],
   templateUrl: "./problem-page.component.html",
   styleUrl: "./problem-page.component.scss",

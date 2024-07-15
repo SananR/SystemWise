@@ -1,18 +1,27 @@
+<app-problem-toolbar class="h-24"></app-problem-toolbar>
 <div
-  class="main-container d-flex justify-content-center align-items-start flex-column h-100"
+  class="main-container d-flex justify-content-center align-items-start flex-column h-100 pt-24"
 >
-  <app-problem-toolbar class="h-24"></app-problem-toolbar>
   <div
     class="w-100 h-100 d-flex justify-content-center align-items-center gap-2"
   >
     <app-tabbed-container class="ml-2 w-50 h-100">
-      <app-tabbed-container-item tabName="Problem Description">
+      <app-tabbed-container-item
+        tabName="Problem Description"
+        class="w-100 h-100 overflow-auto"
+      >
+        <app-problem-description></app-problem-description>
       </app-tabbed-container-item>
       <app-tabbed-container-item
         tabName="Submissions"
         [tabIcon]="faClockRotateLeft"
         iconColor="aqua"
+        class="w-100 h-100 overflow-auto"
       >
+        <app-recent-submission
+          class="h-100 overflow-auto"
+        ></app-recent-submission>
+        <app-submission-list class="w-100"></app-submission-list>
       </app-tabbed-container-item>
     </app-tabbed-container>
 
@@ -23,16 +32,19 @@
         tabName="Text Editor"
         [tabIcon]="faPenToSquare"
         iconColor="gold"
-        class="w-100 h-100"
+        class="w-100 h-100 overflow-auto"
       >
-        <app-text-editor class="w-100 h-100"></app-text-editor>
+        <ng-container class="h-100 w-100 overflow-auto">
+          <app-text-editor class="w-100 h-100"></app-text-editor>
+        </ng-container>
       </app-tabbed-container-item>
       <app-tabbed-container-item
         tabName="Diagramming"
         [tabIcon]="faDiagramProject"
         iconColor="pink"
-        class="w-100 h-100"
+        class="w-100 h-100 overflow-auto"
       >
+        <app-flowchart-editor></app-flowchart-editor>
       </app-tabbed-container-item>
     </app-tabbed-container>
   </div>

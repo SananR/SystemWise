@@ -4,10 +4,11 @@
   <div
     class="tabbed-container-header w-100 h-8 min-h-8 d-flex justify-content-start align-items-center pl-2"
   >
-    <div
+    <li
       class="tab-header-item cursor-pointer d-flex justify-content-start align-items-center rounded-md gap-2 pl-2 pr-2"
       *ngFor="let tab of tabs"
-      (click)="activateTab(tab)"
+      (click)="updateActiveTab(tab)"
+      [ngClass]="{ active: tab.active === true }"
     >
       <fa-icon
         [icon]="tab.tabIcon"
@@ -22,7 +23,7 @@
         }"
         >{{ tab.tabName }}</span
       >
-    </div>
+    </li>
   </div>
-  <ng-container [ngTemplateOutlet]="activeTab.template"></ng-container>
+  <ng-content class="h-100"></ng-content>
 </div>

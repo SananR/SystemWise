@@ -2,6 +2,8 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
+  EventEmitter,
+  Output,
   QueryList,
 } from "@angular/core";
 import { TabbedContainerItemComponent } from "./tabbed-container-item/tabbed-container-item.component";
@@ -25,28 +27,24 @@ import { faBook } from "@fortawesome/free-solid-svg-icons/faBook";
 export class TabbedContainerComponent {
   faBook = faBook;
 
-  constructor(private readonly cdr: ChangeDetectorRef) {}
-
-  @ContentChildren(TabbedContainerItemComponent)
-  tabs!: QueryList<TabbedContainerItemComponent>;
+  tabs: TabbedContainerItemComponent[] = [];
+  @Output() currentTabChange = new EventEmitter<TabbedContainerItemComponent>();
 
   activeTab!: TabbedContainerItemComponent;
 
-  ngAfterContentInit() {
-    this.cdr.detach();
-    this.updateActiveTab();
+  addTab(tab: TabbedContainerItemComponent) {
+    this.tabs.push(tab);
   }
 
-  ngAfterContentChecked() {
-    this.cdr.detectChanges();
+  ngOnInit() {
+    this.updateActiveTab(this.tabs[0]);
   }
 
-  updateActiveTab() {
-    this.activeTab = this.tabs.first;
-  }
-
-  activateTab(tab: TabbedContainerItemComponent) {
+  updateActiveTab(tab: TabbedContainerItemComponent) {
+    this.tabs.forEach((tab) => {
+      tab.active = false;
+    });
+    tab.active = true;
     this.activeTab = tab;
-    this.cdr.detectChanges();
   }
 }
