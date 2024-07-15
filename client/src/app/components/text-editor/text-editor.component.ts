@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { environment } from "../../../environment/environment";
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { ProblemService } from "../../services/problem.service";
 import {
   QuickToolbarSettingsModel,
   RichTextEditorModule,
@@ -12,7 +12,9 @@ import {
   templateUrl: "./text-editor.component.html",
   styleUrl: "./text-editor.component.scss",
 })
-export class TextEditorComponent {
+export class TextEditorComponent implements AfterViewInit {
+  @ViewChild("editor") editor: any;
+
   public quickToolbar: QuickToolbarSettingsModel = {
     table: [
       "TableHeader",
@@ -43,4 +45,10 @@ export class TextEditorComponent {
       "FullScreen",
     ],
   };
+
+  constructor(private problemService: ProblemService) {}
+
+  ngAfterViewInit() {
+    this.problemService.initializeTextEditor(this.editor);
+  }
 }

@@ -1,13 +1,12 @@
 import { Injectable } from "@angular/core";
 import {
-  Observable,
   timer,
   Subject,
   switchMap,
   takeUntil,
-  tap,
   retry,
   share,
+  BehaviorSubject,
 } from "rxjs";
 import { SubmissionRepositoryService } from "../repositories/submission-repository.service";
 
@@ -19,6 +18,8 @@ const POLL_INTERVAL = 5000; // <-- poll every 5 seconds
 export class SubmissionsService {
   closeTimer = new Subject<any>();
   submissionResult = new Subject<any>();
+  recentSubmissionId = new Subject<string>();
+  userTextContent = new BehaviorSubject<string>("");
 
   constructor(private submissionRepository: SubmissionRepositoryService) {}
 
@@ -26,9 +27,23 @@ export class SubmissionsService {
     this.closeTimer.next(1);
   }
 
-  checkSubmission(submissionId: string) {
-    this.submissionResult = new Subject<any>();
+  createSubmission(content: string) {
     this.closeTimer.next(0);
+    this.submissionResult = new Subject<any>();
+    return this.submissionRepository.createSubmission(content).subscribe({
+      next: (value) => {
+        if (value.error) return value.error;
+        this.recentSubmissionId.next(value.submission_id);
+        this.checkSubmission(value.submission_id);
+      },
+      error(err) {
+        console.log(err);
+        return err;
+      },
+    });
+  }
+
+  checkSubmission(submissionId: string) {
     return timer(0, POLL_INTERVAL)
       .pipe(
         switchMap(() =>

@@ -42,6 +42,8 @@ export async function gradeSubmission(input: string) {
        As well as the general understanding and quality protrayed in the submission. Any submissions that are too short to represent any meaningful attempt \
        Should automatically be assigned to a score of 0-10. For example, if the reference solutions are on average 200 words, and a provided user submission has only \
        around 10 words in it, the maximum score that submission should recieve would be 10. \
+       The user's input will be provided to you as HTML code from a WYSIWYG Text Editor. During your evaluation, you SHOULD NOT consider formatting or the use \
+       of HTML in your grading, instead the user's submission should be graded purely on the quality of it's content, not the presentation. \
        Your output to this query should return ONLY A SINGLE INTEGER VALUE BETWEEN 0 AND 100 \
        If the user has made no significant attempt at a solution, if the solution is irrelevant to the given problem, or if the solution is otherwise of low quality then \
        you should automatically output a grade of 0. \
