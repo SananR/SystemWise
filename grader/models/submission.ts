@@ -6,14 +6,14 @@ export enum SubmissionJobType {
 }
 
 export enum SubmissionStatus {
-  AWAITING_GRADING = 'AWAITING_GRADING',
-  GRADED = 'GRADED',
+  AWAITING_GRADING = "AWAITING_GRADING",
+  GRADED = "GRADED",
 }
 
-const SubmissionSchema = new mongoose.Schema({
+export const SubmissionSchema = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     //required: true,
   },
   problem: {
@@ -31,8 +31,6 @@ const SubmissionSchema = new mongoose.Schema({
     default: SubmissionStatus.AWAITING_GRADING,
   },
   score: {
-    type: Number
-  }
+    type: Number,
+  },
 });
-
-export const Submission = mongoose.model('Submission', SubmissionSchema);

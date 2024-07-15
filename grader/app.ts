@@ -1,12 +1,13 @@
 import { Job, Worker } from "bullmq";
+import mongoose from "mongoose";
 import "dotenv/config";
 import { Redis } from "ioredis";
 import { gradeSubmission } from "./grader.ts";
-import { SubmissionJobType, Submission } from "../server/src/models/submission.ts";
-import mongoose from "mongoose";
+import { SubmissionJobType, SubmissionSchema } from "./models/submission.ts";
 import { SubmissionStatus } from "./models/submission.ts";
 
 let redisClient: Redis;
+let mongoConnection: mongoose.Connection;
 
 /*
   Establish redis connection
@@ -28,11 +29,14 @@ redisClient = new Redis(
   Establish MongoDB connection
 */
 try {
-  await mongoose.connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.reshd9v.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority&appName=Cluster0`,
-    {}
-  );
-  console.log('MongoDB connected...');
+  mongoConnection = await mongoose
+    .createConnection(
+      `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.reshd9v.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority&appName=Cluster0`,
+      {}
+    )
+    .asPromise();
+  mongoConnection.model("Submission", SubmissionSchema);
+  console.log("MongoDB connected...");
 } catch (err) {
   console.error(err.message);
   process.exit(1);
@@ -51,14 +55,17 @@ const gradingWorker = new Worker(
     // Grade submission
     const res = await gradeSubmission(submissionTextContent);
     const score: Number = +res.output;
-    console.log(score);
     // Update submission
-    const submission = await Submission.findOneAndUpdate(
-      {_id: job.data.submission._id},
-      {"$set": {status: SubmissionStatus.GRADED, score: score}},
-      { upsert: true }
-    );
-    console.log(submission);
+    const submission = await mongoConnection
+      .collection("submissions")
+      .findOneAndUpdate(
+        {
+          _id: mongoose.Types.ObjectId.createFromHexString(
+            job.data.submission._id
+          ),
+        },
+        { $set: { status: SubmissionStatus.GRADED, score: score } }
+      );
     return submission;
   },
   { connection: redisClient }
@@ -66,4 +73,7 @@ const gradingWorker = new Worker(
 
 gradingWorker.on("ready", function () {
   console.log("Worker is started and ready...");
+});
+gradingWorker.on("failed", (job, error) => {
+  console.log(error);
 });

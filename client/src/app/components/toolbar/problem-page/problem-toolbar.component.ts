@@ -5,11 +5,12 @@ import { LogoComponent } from "../../logo/logo.component";
 import { Router } from "@angular/router";
 import { HostListener } from "@angular/core";
 import { UserAuthService } from "../../../services/user-auth.service";
-import { Subscription } from "rxjs";
+import { Subscription, tap } from "rxjs";
 import { faPaperPlane, faComments } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { SubmissionsService } from "../../../services/submissions.service";
 
 @Component({
   selector: "app-problem-toolbar",
@@ -36,7 +37,8 @@ export class ProblemToolbarComponent {
   constructor(
     private router: Router,
     protected authApi: UserAuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private submissionService: SubmissionsService
   ) {}
 
   ngOnInit() {
@@ -94,5 +96,10 @@ export class ProblemToolbarComponent {
         panelClass: ["position-fixed", "top-0", "z-10", "right-0"],
       }
     );
+    this.submissionService.checkSubmission("66943484add1a966ebb08bbf");
+    this.submissionService.submissionResult.subscribe((res) => {
+      console.log(res);
+      this.submissionService.submissionResult.complete();
+    });
   }
 }
