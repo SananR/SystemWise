@@ -30,6 +30,7 @@
     "bootstrap": "^5.3.3",
     "express": "^4.18.2",
     "marked": "^12.0.2",
+    "mermaid": "^10.9.1",
     "ngx-bootstrap": "^6.2.0",
     "ngx-markdown": "^18.0.0",
     "prettier": "^3.3.2",
