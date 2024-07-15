@@ -1,16 +1,35 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { MarkdownComponent } from "ngx-markdown";
+import { ScoreCardComponent } from "../score-card/score-card.component";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-recent-submission",
   standalone: true,
-  imports: [MarkdownComponent],
+  imports: [MarkdownComponent, ScoreCardComponent, MatIconModule],
   templateUrl: "./recent-submission.component.html",
   styleUrl: "./recent-submission.component.scss",
 })
 export class RecentSubmissionComponent {
-  recentSubmission: string =
-    "### Grading:\n" +
+  @Output() backArrowClick: EventEmitter<any> = new EventEmitter();
+
+  handleBackArrowClick() {
+    this.backArrowClick.emit();
+  }
+  @Input() data: any;
+
+  feedback: string = "";
+  submission: string = "";
+  score: string = "5";
+
+  ngOnInit() {
+    this.feedback = this.data.feedback;
+    this.submission = this.data.submission;
+    this.score = this.data.score;
+  }
+
+  submissions: string =
+    "#### Feedback\n" +
     "\n" +
     "#### Functional Requirements:\n" +
     "1. User can access the original URL using the shortened URL.\n" +
