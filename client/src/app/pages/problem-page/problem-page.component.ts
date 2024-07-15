@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { TextEditorComponent } from "../../components/text-editor/text-editor.component";
+import { TextEditorComponent } from "../../components/problem/text-editor/text-editor.component";
 import { ProblemToolbarComponent } from "../../components/toolbar/problem-page/problem-toolbar.component";
 import { TabbedContainerComponent } from "../../components/tabbed-container/tabbed-container.component";
 import { TabbedContainerItemComponent } from "../../components/tabbed-container/tabbed-container-item/tabbed-container-item.component";

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
-import { ProblemService } from "../../services/problem.service";
+import { ProblemService } from "../../../services/problem.service";
 import {
   QuickToolbarSettingsModel,
   RichTextEditorModule,

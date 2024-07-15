@@ -1,0 +1,25 @@
+@import "../../../../sass/variables";
+
+.tag-outer-easy {
+    background: $background-dark-color;
+    border: 1px solid $primary-color;
+}
+.tag-text-easy {
+    color: $primary-color;
+}
+
+.tag-outer-medium {
+    background: $background-dark-color;
+    border: 1px solid gold;
+}
+.tag-text-medium {
+    color: gold;
+}
+
+.tag-outer-advanced {
+    background: $background-dark-color;
+    border: 1px solid rgb(174, 38, 174);
+}
+.tag-text-advanced {
+    color: rgb(174, 38, 174);
+}
