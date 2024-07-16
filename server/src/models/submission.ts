@@ -33,6 +33,9 @@ const SubmissionSchema = new mongoose.Schema({
   score: {
     type: Number,
   },
+  feedback: {
+    type: String,
+  },
 });
 
 export const Submission = mongoose.model('Submission', SubmissionSchema);

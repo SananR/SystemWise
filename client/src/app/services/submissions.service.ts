@@ -1,13 +1,5 @@
 import { Injectable } from "@angular/core";
-import {
-  timer,
-  Subject,
-  switchMap,
-  takeUntil,
-  retry,
-  share,
-  BehaviorSubject,
-} from "rxjs";
+import { timer, Subject, switchMap, takeUntil, retry, share } from "rxjs";
 import { SubmissionRepositoryService } from "../repositories/submission-repository.service";
 
 const POLL_INTERVAL = 5000; // <-- poll every 5 seconds

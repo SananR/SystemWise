@@ -37,7 +37,7 @@ submissionsRouter.get(
     return res.status(200).json({
       submission_id: submission._id,
       score: submission.score,
-      feedback: 'TODO',
+      feedback: submission.feedback,
     });
   }
 );
