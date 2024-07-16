@@ -1,11 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ContentChildren,
-  EventEmitter,
-  Output,
-  QueryList,
-} from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { TabbedContainerItemComponent } from "./tabbed-container-item/tabbed-container-item.component";
 import { CommonModule, NgFor, NgClass } from "@angular/common";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -38,6 +31,14 @@ export class TabbedContainerComponent {
 
   ngOnInit() {
     this.updateActiveTab(this.tabs[0]);
+  }
+
+  updateActiveTabNumber(tab: number) {
+    this.tabs.forEach((tab) => {
+      tab.active = false;
+    });
+    this.tabs[tab].active = true;
+    this.activeTab = this.tabs[tab];
   }
 
   updateActiveTab(tab: TabbedContainerItemComponent) {

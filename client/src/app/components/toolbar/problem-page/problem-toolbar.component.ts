@@ -10,6 +10,8 @@ import { faPaperPlane, faComments } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { SubmissionsService } from "../../../services/submissions.service";
+import { ProblemService } from "../../../services/problem.service";
 
 @Component({
   selector: "app-problem-toolbar",
@@ -36,12 +38,18 @@ export class ProblemToolbarComponent {
   constructor(
     private router: Router,
     protected authApi: UserAuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private submissionService: SubmissionsService,
+    private problemService: ProblemService
   ) {}
 
   ngOnInit() {
-    this.authStatusSub = this.authApi.isLoggedIn.subscribe((status) => {
-      this.authenticated = status;
+    this.authApi.me().subscribe((res) => {
+      if (res.error) {
+        this.authenticated = false;
+      } else {
+        this.authenticated = true;
+      }
     });
   }
 
@@ -83,6 +91,23 @@ export class ProblemToolbarComponent {
   }
 
   handleSubmit() {
+    // If not logged in send to login page
+    if (!this.authenticated) {
+      this.router.navigate(["/login"]);
+      return;
+    }
+    const content: string = this.problemService.getTextContent();
+    // Sanity checks / validation on content
+    if (!content || content.length <= 20) {
+      this.snackBar.open("Submission not good enough!", "Close", {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "center",
+        panelClass: ["position-fixed", "top-0", "z-10", "right-0", "bg-danger"],
+      });
+      return;
+    }
+
     this.submitPending = true;
     this.snackBar.open(
       "Your submission is being graded! Awaiting your results...",
@@ -94,5 +119,12 @@ export class ProblemToolbarComponent {
         panelClass: ["position-fixed", "top-0", "z-10", "right-0"],
       }
     );
+    this.submissionService.createSubmission(content);
+    this.submissionService.submissionResult.subscribe((res) => {
+      console.log(res);
+      this.submitPending = false;
+      this.problemService.setCurrentSubmission(res.submission_id);
+      this.submissionService.submissionResult.complete();
+    });
   }
 }

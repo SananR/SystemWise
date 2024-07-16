@@ -1,3 +1,9 @@
 <div class="py-4 px-4 overflow-auto">
+  <div class="mb-4">
+    <markdown [data]="problemTitle"> </markdown>
+    <app-problem-difficulty-tag
+      [difficulty]="problemDifficulty"
+    ></app-problem-difficulty-tag>
+  </div>
   <markdown [data]="problemDescription"> </markdown>
 </div>

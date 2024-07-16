@@ -2,13 +2,13 @@
   <div
     class="shadow-none score-display d-flex justify-content-center align-items-center py-2"
   >
-    <mat-progress-spinner
+    <mat-spinner
       mode="determinate"
-      [value]="scoreAggregated"
-      diameter="80"
+      [value]="score"
+      diameter="100"
       stroke-width="10"
     >
-    </mat-progress-spinner>
-    <div class="score-label position-absolute">{{ score }} / 10</div>
+    </mat-spinner>
+    <div class="score-label position-absolute">{{ score }}%</div>
   </div>
 </mat-card>

@@ -5,7 +5,7 @@
   <div
     class="w-100 h-100 d-flex justify-content-center align-items-center gap-2"
   >
-    <app-tabbed-container class="ml-2 w-50 h-100">
+    <app-tabbed-container class="ml-2 w-50 h-100" #leftContainer>
       <app-tabbed-container-item
         tabName="Problem Description"
         class="w-100 h-100 overflow-auto"
@@ -18,10 +18,7 @@
         iconColor="aqua"
         class="w-100 h-100 overflow-auto"
       >
-        <!-- <app-recent-submission
-          class="h-100 overflow-auto"
-        ></app-recent-submission> -->
-        <app-submission-list class="w-100"></app-submission-list>
+        <app-submission-tab class="w-100"></app-submission-tab>
       </app-tabbed-container-item>
     </app-tabbed-container>
 

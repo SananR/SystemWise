@@ -1,5 +1,5 @@
 export default interface APIResponse {
   success: boolean;
-  error?: string;
-  content?: string;
+  error?: JSON;
+  content?: JSON;
 }

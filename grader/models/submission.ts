@@ -1,19 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 export enum SubmissionJobType {
-  GRADE_SUBMISSION = 'GRADE_SUBMISSION',
-  UPDATE_SUBMISSION = 'UPDATE_SUBMISSION',
+  GRADE_SUBMISSION = "GRADE_SUBMISSION",
+  UPDATE_SUBMISSION = "UPDATE_SUBMISSION",
 }
 
 export enum SubmissionStatus {
-  AWAITING_GRADING = 'AWAITING_GRADING',
-  GRADED = 'GRADED',
+  AWAITING_GRADING = "AWAITING_GRADING",
+  GRADED = "GRADED",
 }
 
-const SubmissionSchema = new mongoose.Schema({
+export const SubmissionSchema = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   problem: {
@@ -34,5 +34,3 @@ const SubmissionSchema = new mongoose.Schema({
     type: Number,
   },
 });
-
-export const Submission = mongoose.model('Submission', SubmissionSchema);
