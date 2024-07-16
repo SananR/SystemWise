@@ -43,22 +43,6 @@ export class ProblemToolbarComponent {
     private problemService: ProblemService
   ) {}
 
-  ngOnInit() {
-    this.authApi.me().subscribe((res) => {
-      if (res.error) {
-        this.authenticated = false;
-      } else {
-        this.authenticated = true;
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.authStatusSub) {
-      this.authStatusSub.unsubscribe();
-    }
-  }
-
   @HostListener("window:scroll", []) onWindowScroll() {
     if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
       if (this.attached) this.attached = false;

@@ -39,7 +39,11 @@
     [label]="'Sign in'"
     (buttonClick)="handleSignInButtonClick()"
     [isDisabled]="!isFormValid()"
+    *ngIf="!isLoading"
   ></app-form-btn>
+  <div class="d-flex justify-content-center align-items-center">
+    <mat-spinner *ngIf="isLoading" diameter="36"></mat-spinner>
+  </div>
 
   <!-- A line that separates the login form from the sign up form. -->
   <div class="d-flex justify-content-center align-items-center my-3">
@@ -55,9 +59,16 @@
   <!-- sign up with google option -->
   <div class="form-group google-btn-container">
     <app-google-auth-btn
+      *ngIf="!isGoogleLoading"
       [text]="'signin_with'"
       (buttonClick)="handleGoogleSignin($event)"
     ></app-google-auth-btn>
+    <div
+      class="d-flex justify-content-center align-items-center"
+      *ngIf="isGoogleLoading"
+    >
+      <mat-spinner diameter="36"></mat-spinner>
+    </div>
   </div>
 
   <!-- Don't have an account? -->
