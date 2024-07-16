@@ -1,6 +1,9 @@
 import { Component } from "@angular/core";
 import { MarkdownComponent } from "ngx-markdown";
-import { ProblemDifficultyTagComponent, ProblemDifficulty } from "../problem-difficulty-tag/problem-difficulty-tag.component";
+import {
+  ProblemDifficultyTagComponent,
+  ProblemDifficulty,
+} from "../problem-difficulty-tag/problem-difficulty-tag.component";
 
 @Component({
   selector: "app-problem-description",
@@ -10,12 +13,10 @@ import { ProblemDifficultyTagComponent, ProblemDifficulty } from "../problem-dif
   styleUrl: "./problem-description.component.scss",
 })
 export class ProblemDescriptionComponent {
-
   //TODO dynamic
   problemDifficulty = ProblemDifficulty.EASY;
 
-  problemTitle =
-    "#### TinyURL";
+  problemTitle = "#### TinyURL";
 
   problemDescription =
     "\n#### Design a URL shortening service.\n" +
