@@ -11,12 +11,5 @@ import { MatIcon, MatIconModule } from "@angular/material/icon";
   styleUrl: "./score-card.component.scss",
 })
 export class ScoreCardComponent {
-  @Input() score: string | undefined;
-
-  scoreAggregated: number = 5;
-  ngOnInit() {
-    if (this.score) {
-      this.scoreAggregated = +this.score * 10;
-    }
-  }
+  @Input() score: number = 0;
 }

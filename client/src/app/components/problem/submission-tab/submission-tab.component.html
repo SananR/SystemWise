@@ -1,0 +1,8 @@
+<app-submission-list #submissionList *ngIf="currentSubmissionId === undefined">
+</app-submission-list>
+
+<app-recent-submission
+  #recentSubmission
+  *ngIf="currentSubmissionId !== undefined"
+>
+</app-recent-submission>

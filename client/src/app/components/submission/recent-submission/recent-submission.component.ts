@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { MarkdownComponent } from "ngx-markdown";
 import { ScoreCardComponent } from "../score-card/score-card.component";
 import { MatIconModule } from "@angular/material/icon";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-recent-submission",
@@ -16,16 +17,13 @@ export class RecentSubmissionComponent {
   handleBackArrowClick() {
     this.backArrowClick.emit();
   }
-  @Input() data: any;
 
   feedback: string = "";
-  submission: string = "";
-  score: string = "5";
+  score: number = 0;
 
-  ngOnInit() {
-    this.feedback = this.data.feedback;
-    this.submission = this.data.submission;
-    this.score = this.data.score;
+  setSubmissionData(feedback: string, score: number) {
+    this.feedback = feedback;
+    this.score = score;
   }
 
   submissions: string =

@@ -8,6 +8,10 @@ import APIResponse from "../util/api-response";
 export class SubmissionRepositoryService {
   constructor(private api: ApiService) {}
 
+  getSubmission(submissionId: string) {
+    return this.api.get<any>(`/api/submissions/?submission_id=${submissionId}`);
+  }
+
   createSubmission(content: string) {
     //todo dynamic problem
     return this.api.post<any>("/api/submissions/?problem=TinyURL", {

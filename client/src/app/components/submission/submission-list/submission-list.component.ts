@@ -1,4 +1,4 @@
-import { Component, Output } from "@angular/core";
+import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RecentSubmissionComponent } from "../recent-submission/recent-submission.component";
 

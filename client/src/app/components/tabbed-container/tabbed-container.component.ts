@@ -33,6 +33,14 @@ export class TabbedContainerComponent {
     this.updateActiveTab(this.tabs[0]);
   }
 
+  updateActiveTabNumber(tab: number) {
+    this.tabs.forEach((tab) => {
+      tab.active = false;
+    });
+    this.tabs[tab].active = true;
+    this.activeTab = this.tabs[tab];
+  }
+
   updateActiveTab(tab: TabbedContainerItemComponent) {
     this.tabs.forEach((tab) => {
       tab.active = false;

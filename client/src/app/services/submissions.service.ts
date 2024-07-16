@@ -18,8 +18,6 @@ const POLL_INTERVAL = 5000; // <-- poll every 5 seconds
 export class SubmissionsService {
   closeTimer = new Subject<any>();
   submissionResult = new Subject<any>();
-  recentSubmissionId = new Subject<string>();
-  userTextContent = new BehaviorSubject<string>("");
 
   constructor(private submissionRepository: SubmissionRepositoryService) {}
 
@@ -27,13 +25,18 @@ export class SubmissionsService {
     this.closeTimer.next(1);
   }
 
+  getSubmission(submissionId: string) {
+    return this.submissionRepository.getSubmission(submissionId);
+  }
+
+  // Create a new submission and start polling for its status
   createSubmission(content: string) {
     this.closeTimer.next(0);
     this.submissionResult = new Subject<any>();
     return this.submissionRepository.createSubmission(content).subscribe({
       next: (value) => {
         if (value.error) return value.error;
-        this.recentSubmissionId.next(value.submission_id);
+        // Start polling for submission status
         this.checkSubmission(value.submission_id);
       },
       error(err) {

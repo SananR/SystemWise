@@ -3,9 +3,7 @@ import {
   SubmissionJobType,
   SubmissionStatus,
 } from '../models/submission.ts';
-import {
-  User
-} from '../models/user.ts';
+import { User } from '../models/user.ts';
 import { Router } from 'express';
 import 'dotenv/config';
 import { isAuthenticated } from '../middleware/auth.ts';
@@ -19,9 +17,34 @@ const submissionQueue = new Queue('SubmissionQueue', {
   connection: redisClient,
 });
 
+submissionsRouter.get(
+  '/',
+  isAuthenticated,
+  query('submission_id').notEmpty().isMongoId().escape(),
+  async (req, res) => {
+    const result = validationResult(req).array();
+    if (result.length != 0) {
+      res.status(400).json({ error: 'Bad Request' });
+      return;
+    }
+    const submission = await Submission.findById(req.query.submission_id);
+    if (!submission) {
+      res
+        .status(404)
+        .json({ error: 'Could not find submission with provided id.' });
+      return;
+    }
+    return res.status(200).json({
+      submission_id: submission._id,
+      score: submission.score,
+      feedback: 'TODO',
+    });
+  }
+);
+
 submissionsRouter.post(
   '/check',
-  //isAuthenticated,
+  isAuthenticated,
   query('submission_id').notEmpty().isMongoId().escape(),
   async (req, res) => {
     const result = validationResult(req).array();
@@ -42,6 +65,7 @@ submissionsRouter.post(
       res.status(200).json({ submission_status: submission.status });
     } else if (SubmissionStatus[submission.status] == SubmissionStatus.GRADED) {
       res.status(200).json({
+        submission_id: submission._id,
         submission_status: submission.status,
         score: submission.score,
       });

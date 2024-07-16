@@ -1,3 +1,18 @@
-<div [ngClass]="{'tag-outer-easy': difficulty === ProblemDifficulty.EASY, 'tag-outer-medium': difficulty === ProblemDifficulty.MEDIUM, 'tag-outer-advanced': difficulty === ProblemDifficulty.ADVANCED}" class="overflow-auto pl-2 pr-2 min-h-6 min-w-14 h-6 max-w-20 rounded-full d-flex justify-content-center align-items-center">
-    <span [ngClass]="{'tag-text-easy': difficulty === ProblemDifficulty.EASY, 'tag-text-medium': difficulty === ProblemDifficulty.MEDIUM, 'tag-text-advanced': difficulty === ProblemDifficulty.ADVANCED}" class="overflow-auto text-sm font-bold">{{ difficulty }}</span>
+<div
+  [ngClass]="{
+    'tag-outer-easy': difficulty === ProblemDifficulty.EASY,
+    'tag-outer-medium': difficulty === ProblemDifficulty.MEDIUM,
+    'tag-outer-advanced': difficulty === ProblemDifficulty.ADVANCED,
+  }"
+  class="overflow-auto pl-2 pr-2 min-h-6 min-w-14 h-6 max-w-20 rounded-full d-flex justify-content-center align-items-center"
+>
+  <span
+    [ngClass]="{
+      'tag-text-easy': difficulty === ProblemDifficulty.EASY,
+      'tag-text-medium': difficulty === ProblemDifficulty.MEDIUM,
+      'tag-text-advanced': difficulty === ProblemDifficulty.ADVANCED,
+    }"
+    class="overflow-auto text-sm font-bold"
+    >{{ difficulty }}</span
+  >
 </div>

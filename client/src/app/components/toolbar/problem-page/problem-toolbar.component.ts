@@ -99,16 +99,12 @@ export class ProblemToolbarComponent {
     const content: string = this.problemService.getTextContent();
     // Sanity checks / validation on content
     if (!content || content.length <= 20) {
-      this.snackBar.open(
-        "Submission not good enough!",
-        "Close",
-        {
-          duration: 3000,
-          verticalPosition: "top",
-          horizontalPosition: "center",
-          panelClass: ["position-fixed", "top-0", "z-10", "right-0"],
-        }
-      );
+      this.snackBar.open("Submission not good enough!", "Close", {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "center",
+        panelClass: ["position-fixed", "top-0", "z-10", "right-0", "bg-danger"],
+      });
       return;
     }
 
@@ -127,6 +123,7 @@ export class ProblemToolbarComponent {
     this.submissionService.submissionResult.subscribe((res) => {
       console.log(res);
       this.submitPending = false;
+      this.problemService.setCurrentSubmission(res.submission_id);
       this.submissionService.submissionResult.complete();
     });
   }
