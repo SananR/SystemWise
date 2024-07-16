@@ -1,0 +1,29 @@
+<div class="table-responsive w-100">
+  <table
+    class="table table-striped table-bordered table-dark w-100"
+    *ngIf="currSubmission === null"
+  >
+    <thead>
+      <tr>
+        <th>Time Submitted</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let submission of submissions"
+        (click)="submissionClickHandler(submission)"
+      >
+        <td>{{ submission.timeSubmitted }}</td>
+        <td>
+          {{ submission.status }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-recent-submission
+    *ngIf="currSubmission !== null"
+    (backArrowClick)="handleBackArrowClick()"
+    [data]="currSubmission"
+  ></app-recent-submission>
+</div>
