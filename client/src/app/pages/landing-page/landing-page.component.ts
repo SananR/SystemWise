@@ -23,31 +23,16 @@ export class LandingPageComponent {
   faBrain = faBrain;
   faPeopleGroup = faPeopleGroup;
 
-  authenticated: boolean = false;
-  private authStatusSub: Subscription | null = null;
-
   constructor(
     private router: Router,
     private authApi: UserAuthService
   ) {}
 
-  ngOnInit() {
-    this.authStatusSub = this.authApi.isLoggedIn.subscribe((status) => {
-      this.authenticated = status;
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.authStatusSub) {
-      this.authStatusSub.unsubscribe();
-    }
-  }
-
   getStartedClickHandler() {
-    if (!this.authenticated) {
+    if (!this.authApi.isLoggedIn.value) {
       this.router.navigate(["/signup"]);
     } else {
-      this.router.navigate(["/problems"]);
+      this.router.navigate(["/problem"]);
     }
   }
 }
