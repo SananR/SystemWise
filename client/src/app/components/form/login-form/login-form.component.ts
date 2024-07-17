@@ -8,6 +8,7 @@ import { UserAuthService } from "../../../services/user-auth.service";
 import { Router } from "@angular/router";
 import { GoogleAuthBtnComponent } from "../google-auth-btn/google-auth-btn.component";
 import { SocialUser } from "@abacritt/angularx-social-login";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-login-form",
@@ -19,6 +20,7 @@ import { SocialUser } from "@abacritt/angularx-social-login";
     CommonModule,
     FormsModule,
     GoogleAuthBtnComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: "./login-form.component.html",
   styleUrls: ["./login-form.component.scss"],
@@ -27,6 +29,8 @@ export class LoginFormComponent {
   emailValue: string = "";
   passwordValue: string = "";
   invalidCredentials: boolean = false;
+  isLoading: boolean = false;
+  isGoogleLoading: boolean = false;
 
   constructor(
     private api: UserAuthService,
@@ -49,8 +53,10 @@ export class LoginFormComponent {
   }
 
   handleSignInButtonClick() {
+    this.isLoading = true;
     this.api.signIn(this.emailValue, this.passwordValue).subscribe({
       next: (res) => {
+        this.isLoading = false;
         if (res.error) {
           this.invalidCredentials = true;
         } else {
@@ -65,8 +71,10 @@ export class LoginFormComponent {
   }
 
   handleGoogleSignin(user: SocialUser) {
+    this.isGoogleLoading = true;
     this.api.signInWithGoogle(user.idToken, user.email, user.name).subscribe({
       next: (res) => {
+        this.isGoogleLoading = false;
         if (res.error) {
           this.invalidCredentials = true;
         } else {
