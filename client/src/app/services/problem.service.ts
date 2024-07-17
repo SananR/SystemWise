@@ -18,7 +18,7 @@ export class ProblemService implements OnDestroy {
     this.textEditor.unsubscribe();
   }
 
-  setCurrentSubmission(submissionId: string) {
+  setCurrentSubmission(submissionId: string | undefined) {
     this.currentSubmissionId.next(submissionId);
   }
 

@@ -8,6 +8,10 @@ import APIResponse from "../util/api-response";
 export class SubmissionRepositoryService {
   constructor(private api: ApiService) {}
 
+  getUserSubmissions() {
+    return this.api.get<any>(`/api/submissions/`);
+  }
+
   getSubmission(submissionId: string) {
     return this.api.get<any>(`/api/submissions/?submission_id=${submissionId}`);
   }

@@ -17,6 +17,10 @@ export class SubmissionsService {
     this.closeTimer.next(1);
   }
 
+  getUserSubmissions() {
+    return this.submissionRepository.getUserSubmissions();
+  }
+
   getSubmission(submissionId: string) {
     return this.submissionRepository.getSubmission(submissionId);
   }

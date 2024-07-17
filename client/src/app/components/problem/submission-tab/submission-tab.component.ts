@@ -31,6 +31,7 @@ export class SubmissionTabComponent implements OnInit {
   ngOnInit(): void {
     this.problemsService.currentSubmissionId.subscribe((submissionId) => {
       if (submissionId) this.openSubmission(submissionId);
+      else this.currentSubmissionId = undefined;
     });
   }
 

@@ -3,6 +3,7 @@ import { MarkdownComponent } from "ngx-markdown";
 import { ScoreCardComponent } from "../score-card/score-card.component";
 import { MatIconModule } from "@angular/material/icon";
 import { BehaviorSubject } from "rxjs";
+import { ProblemService } from "../../../services/problem.service";
 
 @Component({
   selector: "app-recent-submission",
@@ -14,8 +15,10 @@ import { BehaviorSubject } from "rxjs";
 export class RecentSubmissionComponent {
   @Output() backArrowClick: EventEmitter<any> = new EventEmitter();
 
+  constructor(private problemService: ProblemService) {}
+
   handleBackArrowClick() {
-    this.backArrowClick.emit();
+    this.problemService.setCurrentSubmission(undefined);
   }
 
   feedback: string = "";

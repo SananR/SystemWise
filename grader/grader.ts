@@ -11,9 +11,9 @@ const chatModel = new ChatOpenAI({
 const designScenario =
   "This is the problem description/statement: TinyURL: Design a URL shortening service. Given a URL, design a web API that generates a shorter and unique alias of it. What is a TinyURL? TinyURL is a URL shortening service that creates a short URL alias of a long URL. When a user clicks on the tiny URL, they will get redirected to the original URL. Tiny URLs are great to use in cases when there is a character/space limit. It is also easier and less error-prone for a user to enter a shorter URL.";
 const commonQuestions =
-  "These are answers to common questions that the interviewee may ask. If the interviewee asks things not covered, answer at your discretion. Assume once a url created it will remain forever in system. Yes user can create a tiny url of his/her choice. Assume maximum character limit to be 16. Assume 100 million new URL shortenings per month. Service should also aggregate metrics like number of URL redirections per day and other analytics for targeted advertisements.";
+  "These are answers to common questions that the interviewee may ask. If the interviewee asks things not covered, answer at your discretion. Assume once a url created it will remain forever in system, alternatively you can specify a certain duration that the URL remains valid for. Yes user can create a tiny url of his/her choice. Assume maximum character limit to be 16 or any other reasonable amount. Assume 100 million new URL shortenings per month or any similar estimate. Service should also aggregate metrics like number of URL redirections per day and other analytics for targeted advertisements.";
 const functionalRequirements =
-  "These are the functional requirements for such a system: Service should be able to create shortened url/links against a long url. Click to the short URL should redirect the user to the original long URL. Shortened link should be as small as possible. Users can create custom url with maximum character limit of 16. Service should collect metrics like most clicked links. Once a shortened link is generated it should stay in system for lifetime.";
+  "These are the functional requirements for such a system: Service should be able to create shortened url/links against a long url. Click to the short URL should redirect the user to the original long URL. Shortened link should be as small as possible. Users can create custom url with maximum character limit of 16. Service should collect metrics like most clicked links. Once a shortened link is generated it should stay in system for lifetime, or the user can make a reasonable assumption about the duration of the link. Service should provide REST API’s to create and get the long URL based on the short URL.";
 const nonFunctionalRequirements =
   "These are non-functional requirements for the system: Service should be up and running all the time. URL redirection should be fast and should not degrade at any point of time (Even during peak loads). Service should expose REST API’s so that it can be integrated with third party applications.";
 const trafficEstimates =
@@ -62,7 +62,13 @@ export async function feedbackSubmission(input: string) {
     ],
     [
       "system",
-      "Your output should be in markdown format as usual, and you should make use of proper markdown formatting for your feedback. Furthermore, try to utilize emojis such as checkmarks and crosses to make your feedback more engaging and easier to understand.",
+      "Your output should be in markdown format as usual, and you should make use of proper markdown formatting for your feedback. \
+      Furthermore, utilize the checkmark and cross emojis to make your feedback more engaging and easier to understand. DO NOT use other variations of these emojis, they should be consistent across submissions. \
+      You should also avoid mentioning the difficulty of the problem in your feedback, as this is not relevant to the user. ",
+    ],
+    [
+      "system",
+      "Try to be as objective and consistent as possible in the evaluation of the user's submission. The ultimate goal is to have a submission always receive the same feedback every time it is evaluated.",
     ],
     [
       "system",
@@ -95,20 +101,18 @@ export async function gradeSubmission(input: string, feedback: string) {
        Your grade should take into account each of the different sections of the system's design, such as but not limited to functional and non functional requirements, \
        estimates of traffic, any tradeoffs that the user made in the design, database design, API design, etc. \
        You will also be provided with the output of a different LLM, this output is some feedback generated for this user submission, you should \
-       also take this feedback into account when coming up with a grade for the user's submission. \
-       The grade that you assign to the user's submission should be based on how similar it is in terms of it's content to the reference solutions, \
-       as well as the general understanding and quality protrayed in the submission. Any submissions that are too short to represent any meaningful attempt \
-       Should automatically be assigned to a score of 0-10. \
+       take this feedback into account when coming up with a grade for the user's submission. \
+       The grade that you assign to the user's submission should be primarily based on the feedback generated in the previous step and provided to you here. \
+       So your goal is to come up with a reasonable score based on the feedback provided to you about the user submission, as well as the submission itself. \
+       In the case that the submission does not represent a reasonable attempt at a solution, the feedback will reflect this and you should assign that submission a score of 0. \
        The user's input will be provided to you as HTML code from a WYSIWYG Text Editor. During your evaluation, you SHOULD NOT consider formatting or the use \
        of HTML in your grading, instead the user's submission should be graded purely on the quality of it's content, not the presentation. \
-       You will also be provided with the 'difficulty' of the problem, this ranges from Easy, Medium and Advanced (the hardest). You should also take this difficulty \
-       into consideration when providing the feedback, problems that are 'Easy' for example you should be less strict whereas with advanced problems you should require \
-       the user to explain things very in-depth \
        Your output to this query should return ONLY A SINGLE INTEGER VALUE BETWEEN 0 AND 100 \
        If the user has made no significant attempt at a solution, if the solution is irrelevant to the given problem, or if the solution is otherwise of low quality then \
        you should automatically output a grade of 0. \
        You will now be provided with the question description, as well as one or more reference solutions, these solutions represent perfect scores in the eyes of the system (a score of 100) \
-       REMEMBER YOU ARE TO ONLY OUTPUT A SINGLE INTEGER BETWEEN 0 AND 100 THAT REPRESENTS THE FINAL SCORE OF THE PROVIDED USER SUBMISSION",
+       REMEMBER YOU ARE TO ONLY OUTPUT A SINGLE INTEGER BETWEEN 0 AND 100 THAT REPRESENTS THE FINAL SCORE OF THE PROVIDED USER SUBMISSION \
+       FINALLY, you should repeat the above process a total of 10 times, obtaining 10 different scores for the same user submission, and then average these scores to get the final score.",
     ],
     ["system", designScenario],
     ["system", commonQuestions],

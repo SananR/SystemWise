@@ -20,25 +20,41 @@ const submissionQueue = new Queue('SubmissionQueue', {
 submissionsRouter.get(
   '/',
   isAuthenticated,
-  query('submission_id').notEmpty().isMongoId().escape(),
+  query('submission_id').notEmpty().isMongoId().escape().optional(),
   async (req, res) => {
     const result = validationResult(req).array();
     if (result.length != 0) {
       res.status(400).json({ error: 'Bad Request' });
       return;
     }
-    const submission = await Submission.findById(req.query.submission_id);
-    if (!submission) {
-      res
-        .status(404)
-        .json({ error: 'Could not find submission with provided id.' });
-      return;
+    if (req.query.submission_id) {
+      const submission = await Submission.findById(req.query.submission_id);
+      if (!submission) {
+        res
+          .status(404)
+          .json({ error: 'Could not find submission with provided id.' });
+        return;
+      }
+      return res.status(200).json({
+        submission_id: submission._id,
+        score: submission.score,
+        feedback: submission.feedback,
+      });
+    } else {
+      const user = await User.findOne({ username: req.session.userId });
+      if (!user) {
+        return res.status(500).json({ error: 'Could not find user.' });
+      }
+      const submissions = await Submission.find(
+        { user: user._id },
+        'score feedback _id createdAt status'
+      )
+        .sort({ createdAt: -1 })
+        .limit(20);
+      return res.status(200).json({
+        submissions,
+      });
     }
-    return res.status(200).json({
-      submission_id: submission._id,
-      score: submission.score,
-      feedback: submission.feedback,
-    });
   }
 );
 

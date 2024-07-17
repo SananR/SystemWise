@@ -1,0 +1,27 @@
+@import "../../../../sass/variables.scss";
+
+.color-high-score {
+  color: $primary-color;
+}
+.color-medium-score {
+  color: gold;
+}
+.color-low-score {
+  color: red;
+}
+
+.tab-even {
+  background: $background-dark-color;
+}
+.tab-odd {
+  background: $background-dark-lighter-color;
+}
+
+.submission-row {
+  line-height: 5em;
+}
+
+.submission-row:hover {
+  background: rgb(63, 63, 63);
+  transition: 0.2s ease;
+}
