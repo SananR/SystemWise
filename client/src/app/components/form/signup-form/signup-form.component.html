@@ -1,5 +1,14 @@
-<form class="shadow px-5 py-4 w-100 signup-form">
+<form class="shadow px-5 py-4 signup-form mt-5">
   <h1 class="mb-4">Sign up to get started.</h1>
+  <small *ngIf="invalidSignupCredentials" class="text-danger fs-8 mb-4">
+    Invalid signup credentials.
+  </small>
+  <div class="form-group mb-2">
+    <label>Username</label>
+    <app-form-text-input
+      (valueChange)="handleUsernameValueChange($event)"
+    ></app-form-text-input>
+  </div>
   <div class="form-group mb-2">
     <label>Email address</label>
     <app-form-text-input
@@ -72,18 +81,18 @@
       class="d-flex justify-content-center align-items-center w-25 mx-3"
     ></mat-divider>
   </div>
-  <div class="form-group">
-    <app-form-btn
-      [label]="'Sign up with Google'"
-      [isIconHidden]="false"
-      [icon]="'fa-brands fa-google'"
-      [additionalClasses]="'btn-google'"
-      (buttonClick)="handleGoogleAuthButtonClick()"
-    ></app-form-btn>
+  <div class="form-group md-flex google-btn-container">
+    <app-google-auth-btn
+      [text]="'signup_with'"
+      (buttonClick)="handleGoogleSignup($event)"
+    ></app-google-auth-btn>
   </div>
   <div class="d-flex mt-3 justify-content-center">
     <div class="mt-3 text-secondary">
-      Have an account? <a href="/" class="link-primary">Sign in</a>
+      Have an account?
+      <a class="link-primary" (click)="handleSignInButtonClick()" role="button"
+        >Sign in</a
+      >
     </div>
   </div>
 </form>

@@ -1,0 +1,52 @@
+<div
+  class="toolbar-container rounded-1 w-100 z-1 position-fixed bg-dark mt-3"
+  [ngClass]="{ 'toolbar-attach': attached }"
+  *ngIf="this.authApi.isLoggedIn.value !== null"
+>
+  <mat-toolbar
+    class="d-flex gap-2 bg-transparent justify-content-center align-items-center"
+  >
+    <app-logo class="h-100"></app-logo>
+    <div
+      class="d-flex justify-content-center align-items-center position-absolute"
+    >
+      <button
+        (click)="handleSubmit()"
+        class="page-button submit-button btn btn-dark btn-md d-flex justify-content-center align-items-center text-primary gap-2"
+      >
+        <span *ngIf="!submitPending">Submit</span>
+        <span *ngIf="submitPending">Pending</span>
+        <fa-icon
+          *ngIf="!submitPending"
+          [icon]="faPaperPlane"
+          size="1x"
+          class="text-primary"
+        ></fa-icon>
+        <mat-spinner *ngIf="submitPending" diameter="24"></mat-spinner>
+      </button>
+      <button
+        class="page-button feedback-button btn btn-dark btn-md d-flex justify-content-center align-items-center text-light gap-2"
+      >
+        Get Feedback
+        <fa-icon [icon]="faComments" size="1x" class="text-primary"></fa-icon>
+      </button>
+    </div>
+
+    <button
+      class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"
+      style="font-weight: 500"
+      *ngIf="this.authApi.isLoggedIn.value === false"
+      (click)="goToPage('login')"
+    >
+      Sign In
+    </button>
+    <button
+      class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"
+      style="font-weight: 500"
+      *ngIf="this.authApi.isLoggedIn.value === true"
+      (click)="handleSignOut()"
+    >
+      Sign Out
+    </button>
+  </mat-toolbar>
+</div>

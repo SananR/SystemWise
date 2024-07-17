@@ -1,0 +1,37 @@
+<div class="table-responsive w-100">
+  <table class="table-hover w-100">
+    <thead>
+      <tr class="leading-8">
+        <th class="pl-2">Time Submitted</th>
+        <th class="text-center">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let submission of submissions; let i = index"
+        (click)="submissionClickHandler(submission)"
+        [ngClass]="{ 'tab-even': i % 2 == 0, 'tab-odd': i % 2 != 0 }"
+        class="submission-row border-none text-gray-300"
+      >
+        <td class="pl-2">{{ getDateFormat(submission.createdAt) }}</td>
+        <td
+          class="text-center font-bold text-xl"
+          [ngClass]="{
+            'color-high-score': submission.score >= 70,
+            'color-medium-score':
+              submission.score >= 50 && submission.score < 70,
+            'color-low-score': submission.score < 50,
+          }"
+        >
+          <span *ngIf="submission.score >= 0">{{ submission.score }}</span>
+          <div
+            class="w-full h-full text-center d-flex justify-content-center align-items-center"
+            *ngIf="submission.score === undefined"
+          >
+            <mat-spinner diameter="25"> </mat-spinner>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

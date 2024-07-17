@@ -1,7 +1,9 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
+.env
+
 # Compiled output
-/dist
+**/dist
 /tmp
 /out-tsc
 /bazel-out
@@ -38,6 +40,7 @@ yarn-error.log
 testem.log
 /typings
 eslint.config.mjs
+*.rdb
 
 # System files
 **/.DS_Store

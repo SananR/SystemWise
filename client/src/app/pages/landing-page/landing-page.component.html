@@ -1,0 +1,92 @@
+<div class="main h-100">
+  <app-toolbar></app-toolbar>
+  <div
+    class="container1 w-100 position-relative d-flex justify-content-start align-items-center"
+  >
+    <div class="vector1 w-50 h-100"></div>
+    <div
+      class="container1-content d-flex justify-content-center align-items-center flex-column gap-0 pl-5 pr-5 pt-5"
+    >
+      <p class="text-center fs-1 fw-bold text-light m-0">
+        Master System Design
+      </p>
+      <div
+        class="w-100 d-flex flex-wrap justify-content-center align-items-center gap-2 m-0"
+      >
+        <p
+          class="d-inline-block text-center h-auto fs-1 fw-bold text-light text-start text-nowrap m-0"
+        >
+          By solving
+        </p>
+        <p
+          class="text-center h-auto fs-1 fw-bold text-primary text-start text-nowrap m-0"
+        >
+          real world problems!
+        </p>
+      </div>
+      <p class="text-center h-auto fs-5 fw-light text-light text-start">
+        SystemWise aims to bridge the gap between theoretical software design
+        knowledge and practical experience. Perfect your skills through
+        iterative practice, and level up as a software engineer!
+      </p>
+      <button
+        class="btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white"
+        (click)="getStartedClickHandler()"
+      >
+        Get Started Now
+      </button>
+    </div>
+  </div>
+  <div
+    class="container2 w-100 d-flex justify-content-center align-items-center gap-5 flex-wrap"
+  >
+    <div
+      class="card shadow-lg rounded-4 d-flex flex-column justify-content-center align-items-center mt-4"
+    >
+      <fa-icon [icon]="faBolt" size="6x" class="card-icon"></fa-icon>
+      <p class="text-center h-auto fs-5 fw-bold text-light text-start mt-2">
+        Instant Feedback
+      </p>
+      <p
+        class="card-text text-center h-auto fs-5 fw-light text-light text-start h-50"
+      >
+        Our AI-powered chatbot is designed to enhance your learning experience
+        by providing real-time feedback and guidance as you solve system design
+        problems.
+      </p>
+    </div>
+
+    <div
+      class="card shadow-lg rounded-4 d-flex flex-column justify-content-center align-items-center mt-4"
+    >
+      <fa-icon [icon]="faBrain" size="6x" class="card-icon"></fa-icon>
+      <p class="text-center h-auto fs-5 fw-bold text-light text-start mt-2">
+        Interactive Practice
+      </p>
+      <p
+        class="card-text text-center h-auto fs-5 fw-light text-light text-start h-50"
+      >
+        Prepare for real-world challenges by tackling problems that mirror the
+        complexities of modern software architecture. Our problems are designed
+        to reflect actual industry issues, ensuring you gain practical and
+        relevant skills.
+      </p>
+    </div>
+
+    <div
+      class="card shadow-lg rounded-4 d-flex flex-column justify-content-center align-items-center mt-4"
+    >
+      <fa-icon [icon]="faPeopleGroup" size="6x" class="card-icon"></fa-icon>
+      <p class="text-center h-auto fs-5 fw-bold text-light text-start mt-2">
+        Community Learning
+      </p>
+      <p
+        class="card-text text-center h-auto fs-5 fw-light text-light text-start h-50"
+      >
+        Learning is more effective when it's collaborative. Progress tracking
+        and community engagement combines personal growth with collaborative
+        learning, ensuring you get the most out of your practice.
+      </p>
+    </div>
+  </div>
+</div>

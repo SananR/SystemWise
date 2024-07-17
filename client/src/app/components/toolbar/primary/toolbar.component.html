@@ -1,0 +1,50 @@
+<div
+  class="toolbar-container rounded-1 w-100 z-1 position-fixed bg-dark mt-3"
+  [ngClass]="{ 'toolbar-attach': attached }"
+  *ngIf="this.authApi.isLoggedIn.value !== undefined"
+>
+  <mat-toolbar
+    class="d-flex gap-2 bg-transparent justify-content-center align-items-center"
+  >
+    <app-logo class="h-100"></app-logo>
+    <button
+      class="page-button btn btn-md d-flex justify-content-center align-items-center text-white"
+    >
+      Explore Problems
+    </button>
+    <button
+      class="page-button btn btn-md d-flex justify-content-center align-items-center text-white"
+    >
+      Guides
+    </button>
+    <button
+      class="page-button btn btn-md d-flex justify-content-center align-items-center text-white"
+    >
+      Leaderboards
+    </button>
+
+    <button
+      class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"
+      style="font-weight: 500"
+      *ngIf="!this.authApi.isLoggedIn.value"
+      (click)="goToPage('login')"
+    >
+      Sign In
+    </button>
+    <button
+      class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"
+      style="font-weight: 500"
+      *ngIf="this.authApi.isLoggedIn.value"
+      (click)="handleSignOut()"
+    >
+      Sign Out
+    </button>
+    <button
+      class="signup-button btn btn-primary btn-lg d-flex justify-content-center align-items-center fs-6"
+      style="font-weight: 500"
+      (click)="startPracticingClickHandler()"
+    >
+      Start Practicing
+    </button>
+  </mat-toolbar>
+</div>

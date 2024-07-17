@@ -1,0 +1,30 @@
+{
+  "name": "grader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start:grader": "npx tsx app.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "@types/node": "^20.14.10",
+    "eslint": "^9.6.0",
+    "prettier": "^3.3.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@langchain/community": "^0.2.18",
+    "@langchain/openai": "^0.2.1",
+    "bullmq": "^5.8.7",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1",
+    "langchain": "^0.2.9",
+    "mongoose": "^8.4.4",
+    "redis": "^4.6.15"
+  }
+}

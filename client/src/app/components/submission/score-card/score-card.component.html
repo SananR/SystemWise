@@ -1,0 +1,14 @@
+<mat-card class="shadow-none position-relative">
+  <div
+    class="shadow-none score-display d-flex justify-content-center align-items-center py-2"
+  >
+    <mat-spinner
+      mode="determinate"
+      [value]="score"
+      diameter="100"
+      stroke-width="10"
+    >
+    </mat-spinner>
+    <div class="score-label position-absolute">{{ score }}%</div>
+  </div>
+</mat-card>
