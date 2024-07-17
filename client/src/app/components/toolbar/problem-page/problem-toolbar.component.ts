@@ -77,7 +77,7 @@ export class ProblemToolbarComponent {
     if (!this.authApi.isLoggedIn.value) {
       this.router.navigate(["/login"]);
       return;
-    }
+    } else if (this.submitPending) return;
     const content: string = this.problemService.getTextContent();
     // Sanity checks / validation on content
     if (!content || content.length <= 20) {
