@@ -6,11 +6,27 @@ import { catchError, of, tap, BehaviorSubject } from "rxjs";
   providedIn: "root",
 })
 export class UserAuthService {
-  public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+  public isLoggedIn = new BehaviorSubject<boolean | null>(null);
 
-  constructor(private user: UserRepositoryService) {}
+  constructor(private user: UserRepositoryService) {
+    this.me().subscribe({
+      next: (res) => {
+        if (res.error) {
+          this.isLoggedIn.next(false);
+        } else {
+          this.isLoggedIn.next(true);
+        }
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.isLoggedIn.next(false); // Because error is being caught
+        }
+        if (!err.error.error) {
+          console.log(err.error);
+        }
+      },
+    });
+  }
 
   signUp(username: string, email: string, password: string) {
     return this.user.signUp(username, email, password).pipe(
@@ -39,11 +55,7 @@ export class UserAuthService {
   }
 
   me() {
-    return this.user.me().pipe(
-      catchError((_) => {
-        return of({ error: "Not authenticated" });
-      })
-    );
+    return this.user.me();
   }
 
   signUpWithGoogle(idToken: string, email: string, name: string) {
