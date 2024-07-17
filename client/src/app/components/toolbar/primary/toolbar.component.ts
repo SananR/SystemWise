@@ -15,12 +15,30 @@ import { Subscription } from "rxjs";
   styleUrl: "./toolbar.component.scss",
 })
 export class ToolbarComponent {
+  private authStatusSub: Subscription | null = null;
+  authenticated: boolean | undefined;
   attached: Boolean = true;
 
   constructor(
     private router: Router,
     protected authApi: UserAuthService
   ) {}
+
+  ngOnInit() {
+    this.authApi.me().subscribe((res) => {
+      if (res.error) {
+        this.authenticated = false;
+      } else {
+        this.authenticated = true;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.authStatusSub) {
+      this.authStatusSub.unsubscribe();
+    }
+  }
 
   @HostListener("window:scroll", []) onWindowScroll() {
     if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
@@ -31,7 +49,7 @@ export class ToolbarComponent {
   }
 
   startPracticingClickHandler() {
-    if (!this.authApi.isLoggedIn.value) {
+    if (!this.authenticated) {
       this.router.navigate(["/signup"]);
     } else {
       this.router.navigate(["/problems"]);

@@ -1,7 +1,7 @@
 <div
   class="toolbar-container rounded-1 w-100 z-1 position-fixed bg-dark mt-3"
   [ngClass]="{ 'toolbar-attach': attached }"
-  *ngIf="this.authApi.isLoggedIn.value !== null"
+  *ngIf="authenticated !== undefined"
 >
   <mat-toolbar
     class="d-flex gap-2 bg-transparent justify-content-center align-items-center"

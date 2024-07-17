@@ -1,7 +1,7 @@
 <div
   class="toolbar-container rounded-1 w-100 z-1 position-fixed bg-dark mt-3"
   [ngClass]="{ 'toolbar-attach': attached }"
-  *ngIf="this.authApi.isLoggedIn.value !== undefined"
+  *ngIf="authenticated !== undefined"
 >
   <mat-toolbar
     class="d-flex gap-2 bg-transparent justify-content-center align-items-center"
@@ -26,7 +26,7 @@
     <button
       class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"
       style="font-weight: 500"
-      *ngIf="!this.authApi.isLoggedIn.value"
+      *ngIf="!authenticated"
       (click)="goToPage('login')"
     >
       Sign In
@@ -34,7 +34,7 @@
     <button
       class="signin-button page-button btn btn-outline-primary btn-md d-flex justify-content-center align-items-center text-white ms-auto"
       style="font-weight: 500"
-      *ngIf="this.authApi.isLoggedIn.value"
+      *ngIf="authenticated"
       (click)="handleSignOut()"
     >
       Sign Out
