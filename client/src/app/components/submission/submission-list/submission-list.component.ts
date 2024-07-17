@@ -1,77 +1,52 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RecentSubmissionComponent } from "../recent-submission/recent-submission.component";
+import { SubmissionsService } from "../../../services/submissions.service";
+import { ProblemService } from "../../../services/problem.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-submission-list",
   standalone: true,
-  imports: [CommonModule, RecentSubmissionComponent],
+  imports: [CommonModule, RecentSubmissionComponent, MatProgressSpinnerModule],
   templateUrl: "./submission-list.component.html",
   styleUrl: "./submission-list.component.scss",
 })
 export class SubmissionListComponent {
-  submissions: any[] = [
-    {
-      timeSubmitted: "07/13/2024 18:19",
-      score: "7",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-    {
-      timeSubmitted: "07/13/2024 17:14",
-      score: "3",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-    {
-      timeSubmitted: "07/13/2024 17:14",
-      score: "4",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-    {
-      timeSubmitted: "07/13/2024 17:12",
-      score: "7",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-    {
-      timeSubmitted: "07/13/2024 17:12",
-      score: "7",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-    {
-      timeSubmitted: "06/05/2024 22:39",
-      score: "7",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-    {
-      timeSubmitted: "05/01/2024 08:59",
-      score: "7",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-    {
-      timeSubmitted: "11/07/2023 17:40",
-      score: "7",
-      submission: "This is submission 0",
-      feedback: "This is feedback 0",
-    },
-  ];
+  submissions: any[] = [];
 
-  currSubmission: any | null = null;
+  constructor(
+    private submissionService: SubmissionsService,
+    private problemService: ProblemService
+  ) {}
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  submissionClickHandler(submission: any) {
-    this.currSubmission = submission;
+  ngOnInit(): void {
+    this.submissionService.getUserSubmissions().subscribe({
+      next: (value) => {
+        this.submissions = value.submissions;
+      },
+      error(err) {
+        if (err.status == 401) return;
+        console.log(err);
+        return err;
+      },
+    });
   }
 
-  handleBackArrowClick() {
-    this.currSubmission = null;
+  getDateFormat(date: string) {
+    return (
+      new Date(date).toLocaleDateString("en-us", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      }) +
+      " at " +
+      new Date(date).toLocaleTimeString("en-us")
+    );
+  }
+
+  submissionClickHandler(submission: any) {
+    this.problemService.setCurrentSubmission(submission._id);
   }
 }

@@ -2,7 +2,7 @@ import { Job, Worker } from "bullmq";
 import mongoose from "mongoose";
 import "dotenv/config";
 import { Redis } from "ioredis";
-import { gradeSubmission } from "./grader.ts";
+import { feedbackSubmission, gradeSubmission } from "./grader.ts";
 import { SubmissionJobType, SubmissionSchema } from "./models/submission.ts";
 import { SubmissionStatus } from "./models/submission.ts";
 
@@ -53,8 +53,12 @@ const gradingWorker = new Worker(
     }
     const submissionTextContent = job.data.submission.content;
     // Grade submission
-    const res = await gradeSubmission(submissionTextContent);
-    const score: Number = +res.output;
+    const feedbackRes = await feedbackSubmission(submissionTextContent);
+    const scoreRes = await gradeSubmission(
+      submissionTextContent,
+      feedbackRes.output
+    );
+    const score: Number = +scoreRes.output;
     // Update submission
     const submission = await mongoConnection
       .collection("submissions")
@@ -64,7 +68,13 @@ const gradingWorker = new Worker(
             job.data.submission._id
           ),
         },
-        { $set: { status: SubmissionStatus.GRADED, score: score } }
+        {
+          $set: {
+            status: SubmissionStatus.GRADED,
+            score: score,
+            feedback: feedbackRes.output,
+          },
+        }
       );
     return submission;
   },

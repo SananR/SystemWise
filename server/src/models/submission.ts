@@ -10,29 +10,35 @@ export enum SubmissionStatus {
   GRADED = 'GRADED',
 }
 
-const SubmissionSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Types.ObjectId,
-    ref: 'User',
-    required: true,
+const SubmissionSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    problem: {
+      type: String,
+      //ref: 'Problem',
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: SubmissionStatus,
+      default: SubmissionStatus.AWAITING_GRADING,
+    },
+    score: {
+      type: Number,
+    },
+    feedback: {
+      type: String,
+    },
   },
-  problem: {
-    type: String,
-    //ref: 'Problem',
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: SubmissionStatus,
-    default: SubmissionStatus.AWAITING_GRADING,
-  },
-  score: {
-    type: Number,
-  },
-});
+  { timestamps: true }
+);
 
 export const Submission = mongoose.model('Submission', SubmissionSchema);

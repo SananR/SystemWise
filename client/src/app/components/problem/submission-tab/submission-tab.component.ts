@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { SubmissionListComponent } from "../../submission/submission-list/submission-list.component";
 import { NgIf } from "@angular/common";
 import { RecentSubmissionComponent } from "../../submission/recent-submission/recent-submission.component";
@@ -31,6 +31,7 @@ export class SubmissionTabComponent implements OnInit {
   ngOnInit(): void {
     this.problemsService.currentSubmissionId.subscribe((submissionId) => {
       if (submissionId) this.openSubmission(submissionId);
+      else this.currentSubmissionId = undefined;
     });
   }
 

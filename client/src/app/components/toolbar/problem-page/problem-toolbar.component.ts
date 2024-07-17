@@ -121,7 +121,6 @@ export class ProblemToolbarComponent {
     );
     this.submissionService.createSubmission(content);
     this.submissionService.submissionResult.subscribe((res) => {
-      console.log(res);
       this.submitPending = false;
       this.problemService.setCurrentSubmission(res.submission_id);
       this.submissionService.submissionResult.complete();
