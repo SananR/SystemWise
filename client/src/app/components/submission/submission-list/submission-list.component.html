@@ -23,10 +23,12 @@
             'color-low-score': submission.score < 50,
           }"
         >
-          <span *ngIf="submission.score">{{ submission.score }}</span>
+          <span *ngIf="submission.score !== undefined">{{
+            submission.score
+          }}</span>
           <div
             class="w-full h-full text-center d-flex justify-content-center align-items-center"
-            *ngIf="!submission.score"
+            *ngIf="!submission.score === undefined"
           >
             <mat-spinner diameter="25"> </mat-spinner>
           </div>

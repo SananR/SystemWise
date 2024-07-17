@@ -32,7 +32,7 @@ export class LandingPageComponent {
     if (!this.authApi.isLoggedIn.value) {
       this.router.navigate(["/signup"]);
     } else {
-      this.router.navigate(["/problems"]);
+      this.router.navigate(["/problem"]);
     }
   }
 }
