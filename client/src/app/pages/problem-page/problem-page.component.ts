@@ -13,7 +13,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { RecentSubmissionComponent } from "../../components/submission/recent-submission/recent-submission.component";
 import { SubmissionListComponent } from "../../components/submission/submission-list/submission-list.component";
 import { ProblemDescriptionComponent } from "../../components/problem/problem-description/problem-description.component";
-import { FlowchartEditorComponent } from "../../components/diagram-editor/flowchart-editor/flowchart-editor.component";
+import { FlowchartEditorComponent } from "../../components/diagram/flowchart-editor/flowchart-editor.component";
 import { ProblemService } from "../../services/problem.service";
 
 @Component({
